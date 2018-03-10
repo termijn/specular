@@ -29,19 +29,26 @@ var app = new Vue({
     }
 });
 
-updateTime();
-nextTime();
-
-function nextTime() {
-    setTimeout(function () {
-        updateTime();
-        nextTime();
-    }, 30000);
-}
+interval(30 * 1000, updateTime);
+interval(60 * 1000 * 60, updateWeatherToday);
 
 function updateTime()
 {
     var d = new Date();
     app.time = d.getHours() + ":" + d.getMinutes().toLocaleString(undefined, {minimumIntegerDigits: 2});
+}
+
+function updateWeatherToday()
+{
+    
+}
+
+function interval(intervalDuration, callback)
+{
+    callback();
+    setTimeout(function () {
+        callback();
+        interval(intervalDuration, callback);
+    }, intervalDuration);
 }
 
