@@ -1,4 +1,4 @@
-# speculum
+# Speculum
 Project for powering a magic mirror
 
 
