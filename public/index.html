@@ -1,1 +1,64 @@
-Test123
+<html>
+    <head>
+        <title>Speculum Smart Mirror</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <link rel="stylesheet" type="text/css" href="dependencies/skeleton-css/css/normalize.css">
+        <!--link rel="stylesheet" type="text/css" href="dependencies/skeleton/skeleton-css/css/skeleton.css"-->
+        <link rel="stylesheet" type="text/css" href="dependencies/@icon/weather-icons/weather-icons.css">
+        <link rel="stylesheet" type="text/css" href="css/general.css">
+
+        <script src="dependencies/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="weatherapp" class="container">            
+            <div class="four column">
+                <div class="date">
+                    <div>Donderdag, 8 maart 2018</div>
+                    <div class="time">{{time}}</div>
+                </div>
+            </div>
+            <div>
+
+            </div>
+            <weather-today>
+
+            </weather-today>
+            <!--div class="weathertoday">                
+                <i class="wi wi-day-sunny"></i> 
+                <span>
+                {{ weathertoday.temp }}
+                </span>                            
+
+            </div-->
+            <div>
+
+            </div>                
+            <div class="message">
+                {{message}}
+            </div>
+
+            <div>
+
+            </div>                
+            <div>
+                    
+            </div>                
+            <div>
+                
+            </div>                
+            <div>
+                <div class="agenda">
+                    <ol class="agendalist">
+                        <li v-for="appointment in appointments">
+                            {{appointment.title}}
+                        </li>
+                    </ol>                    
+                </div>                        
+            </div>           
+        </div>
+
+        <script src="js/app.js"></script>
+    </body>
+</html>
