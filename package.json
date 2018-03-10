@@ -5,7 +5,8 @@
   "main": "server/app.js",
   "scripts": {
     "start": "node server/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "node ./node_modules/frontend-dependencies/index.js"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,15 @@
   "homepage": "https://github.com/termijn/speculum#readme",
   "dependencies": {
     "express": "^4.16.2",
-    "vue": "^2.5.14"
+    "frontend-dependencies": "^1.1.0",
+    "skeleton": "^0.1.2"
+  },
+  "frontendDependencies": {
+    "target": "public/dependencies",
+    "packages": {
+      "skeleton": {
+        "version": "^0.1.2"
+      }
+    }
   }
 }
