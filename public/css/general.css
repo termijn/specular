@@ -21,11 +21,11 @@
 body
 {
     font-family: 'HelveticaNeue-UltraLight' !important;
-    font-size: 1.4em;
     background-color: black !important;
     color: #FFF !important;
     text-align: center !important;
     margin: 128px;
+    font-size: 24px;
 }
 
 div.date
@@ -35,14 +35,25 @@ div.date
 
 div.date .time
 {
-    font-size: 96px;
+    font-size: 81px;
 }
 
 div.weathertoday
 {
     vertical-align: top;     
     text-align: right;
-    font-size: 56px;
+    font-size: 81px;
+}
+div.weathertoday img
+{
+    vertical-align: top;
+    height: auto;
+    width: 75px;
+}
+
+div.weathertoday .description
+{
+    font-size: 24px;
 }
 
 .weather
@@ -86,15 +97,14 @@ div.weathertoday
     font-size: 16px;
 }
 
-/* Enter and leave animations can use different */
-/* durations and timing functions.              */
-.slide-fade-enter-active {
+.fade-enter-active {
     transition: all 4s ease;
-  }
-  .slide-fade-leave-active {
+}
+  
+.fade-leave-active {
     transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-  }
-  .slide-fade-enter, .slide-fade-leave-to
-  /* .slide-fade-leave-active below version 2.1.8 */ {
+}
+
+.fade-enter, .fade-leave-to {
     opacity: 0;
-  }
+}
