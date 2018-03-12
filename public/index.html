@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <link rel="stylesheet" type="text/css" href="dependencies/skeleton-css/css/normalize.css">
-        <link rel="stylesheet" type="text/css" href="dependencies/@icon/weather-icons/weather-icons.css">
+        <link rel="stylesheet" type="text/css" href="dependencies/open-weather-icons/dist/css/open-weather-icons.css">
         <link rel="stylesheet" type="text/css" href="css/general.css">
 
         <script src="dependencies/vue/dist/vue.js"></script>
@@ -23,16 +23,8 @@
             <div></div>
 
             <div></div>                
-            <div></div>                
-            <div>
-                <div class="agenda">
-                    <ol class="agendalist">
-                        <li v-for="appointment in appointments">
-                            {{appointment.title}}
-                        </li>
-                    </ol>                    
-                </div>                        
-            </div>           
+            <headlines></headlines>
+            <xkcd></xkcd>            
         </div>
 
         <script src="js/app.js"></script>

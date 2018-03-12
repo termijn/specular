@@ -1,12 +1,23 @@
-# Speculum
+# Speculum Smart Mirror
 Project for powering a magic mirror
+
+![Speculum smart](.github/header.png)
+
+## Current features
+- Date / Time 
+- Display news headlines
+- Current weather from OpenWeatherMap
+- Today's xkcd comic
 
 ## Dependencies
 - Express 4.16.2
 - Vue 2.5.14
+- Axios
+- Skeleton-css
+- Open weather icons
 
 ## ssh
-# start the ssh-agent in the background
-eval $(ssh-agent -s)
-ssh-add ~/.ssh/id_rsa
+- start the ssh-agent in the background
+- eval $(ssh-agent -s)
+- ssh-add ~/.ssh/id_rsa
 

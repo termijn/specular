@@ -4,7 +4,7 @@ const monthToStr = ['januari', 'februari', 'maart', 'april', 'mei', 'juni', 'jul
 
 var weatherToday =  
 {
-    template: '<div class="weathertoday"><img v-bind:src="iconurl"> <span>{{ temp }}</span>  <div class="description">{{ description }}</div></div>',
+    template: '<div class="weathertoday"><i class="owi" v-bind:class="icon"></i> <span>{{ temp }}</span>  <div class="description">{{ description }}</div></div>',
     /* TODO: use a html builder
     tag('div', 
         tag('span','{{ temp }}') +
@@ -15,7 +15,7 @@ var weatherToday =
     data: function() {
         return {
             temp: '',
-            iconurl: '',
+            icon: '',
             description: ''
         };
     },
@@ -31,7 +31,7 @@ var weatherToday =
                     self.temp = 
                         response.data.temperature + 
                         String.fromCharCode(176);
-                    self.iconurl = response.data.icon;
+                    self.icon = "owi-" + response.data.icon;
                     self.description = response.data.description;
                 });
             });
@@ -84,6 +84,51 @@ var greeting = {
     }
 }
 
+var headlines = {
+    template: '<div class="headlines"><span> {{ currentheadline }} </span></div>',
+    data: function() {
+        return { headlines: [], currentheadline: '', index: 0 }
+    },
+    mounted : function() {
+        this.update();
+    },
+    methods: {
+        update: function() {
+            const self = this;
+            interval(1000 * 60, function() {
+                axios.get('/getHeadlines')
+                .then(function(response){
+                    self.headlines = response.data.headlines;
+                    self.index = 0;
+                    self.updateCurrent();
+                });
+            });
+            interval(5000, function() {
+                self.updateCurrent();
+            })
+        },
+        updateCurrent: function() {
+            this.index = this.index + 1 % this.headlines.length;
+            this.currentheadline = this.headlines[this.index];
+        }
+
+    }
+}
+
+var xkcd = {
+    template: '<div class="xkcd"><img v-bind:src="imgurl"></div>',
+    data: function() {
+        return { imgurl: '' };
+    },
+    mounted: function() {
+        const self = this;
+        axios.get('/getXkcd')
+                .then(function(response){
+                   self.imgurl = response.data.img;
+                });
+    }
+}
+
 var app = new Vue({
     el: '#SpeculumApp',
     data: {
@@ -104,7 +149,9 @@ var app = new Vue({
     components: {
         'weather-today': weatherToday,
         'current-time': currentTime,
-        'greeting': greeting
+        'greeting': greeting,
+        'headlines': headlines,
+        'xkcd': xkcd
     }
 });
 
