@@ -16,8 +16,3 @@ Project for powering a magic mirror
 - Skeleton-css
 - Open weather icons
 
-## ssh
-- start the ssh-agent in the background
-- eval $(ssh-agent -s)
-- ssh-add ~/.ssh/id_rsa
-
