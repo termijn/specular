@@ -2,6 +2,44 @@
 const weekdayToStr = ['Zondag', 'Maandag', 'Dinsdag', 'Woensdag', 'Donderdag', 'Vrijdag', 'Zaterdag'];
 const monthToStr = ['januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december'];
 
+var weatherForecast =
+{
+    template: 
+        '<div class="weatherforecast-container">'+
+        '   <div> <ol> <li>&nbsp;</li> <li>Ochtend</li> <li>Avond</li> </ol> </div>'+
+        '   <div> <ol> <li>{{days[0].weekday}}</li> <li v-for="forecast in days[0].forecasts"><span> <i class="owi" v-bind:class="forecast.icon"></i>{{ forecast.temp }}&deg;</span> </li> </ol> </div>'+
+        '   <div> <ol> <li>{{days[1].weekday}}</li> <li v-for="forecast in days[1].forecasts"><span> <i class="owi" v-bind:class="forecast.icon"></i>{{ forecast.temp }}&deg;</span> </li> </ol> </div>'+
+        '   <div> <ol> <li>{{days[2].weekday}}</li> <li v-for="forecast in days[2].forecasts"><span> <i class="owi" v-bind:class="forecast.icon"></i>{{ forecast.temp }}&deg;</span> </li> </ol> </div>'+
+        '   <div> <ol> <li>{{days[3].weekday}}</li> <li v-for="forecast in days[3].forecasts"><span> <i class="owi" v-bind:class="forecast.icon"></i>{{ forecast.temp }}&deg;</span> </li> </ol> </div>'+
+        '   <div> <ol> <li>{{days[4].weekday}}</li> <li v-for="forecast in days[4].forecasts"><span> <i class="owi" v-bind:class="forecast.icon"></i>{{ forecast.temp }}&deg;</span> </li> </ol> </div>'+
+        '</div>',
+    data: function() {
+        return {
+            days: [
+                { weekday: 'Maandag', forecasts: [ { icon: 'owi-09n', temp: '11', time: 'Ochtend' },{ icon: 'owi-10n', temp: '21', time: 'Avond' } ] },
+                { weekday: 'Dinsdag', forecasts: [ { icon: 'owi-09n', temp: '13', time: 'Ochtend' },{ icon: 'owi-10n', temp: '21', time: 'Avond' } ] },
+                { weekday: 'Woensdag', forecasts: [ { icon: 'owi-08n', temp: '12', time: 'Ochtend' },{ icon: 'owi-10n', temp: '21', time: 'Avond' } ] },
+                { weekday: 'Donderdag', forecasts: [ { icon: 'owi-06n', temp: '10', time: 'Ochtend' },{ icon: 'owi-10n', temp: '21', time: 'Avond' } ] },
+                { weekday: 'Vrijdag', forecasts: [ { icon: 'owi-03n', temp: '9', time: 'Ochtend' },{ icon: 'owi-10n', temp: '21', time: 'Avond' } ] }
+            ]
+        }
+    },
+    mounted: function() {
+        this.update();
+    },
+    methods: {
+        update: function() {
+            const self = this;
+            interval(10 * 60 * 1000, function() {
+                axios.get('/getWeatherForecast')
+                .then(function(response){
+                    
+                });
+            });
+        }
+    }    
+};
+
 var weatherToday =  
 {
     template: '<div class="weathertoday"><i class="owi" v-bind:class="icon"></i> <span>{{ temp }}</span>  <div class="description">{{ description }}</div></div>',
@@ -25,7 +63,7 @@ var weatherToday =
     methods: {
         update: function() {
             const self = this;
-            interval(60 * 1000 * 60, function() {
+            interval(10 * 60 * 1000, function() {
                 axios.get('/getWeatherToday')
                 .then(function(response){
                     self.temp = 
@@ -148,6 +186,7 @@ var app = new Vue({
     },
     components: {
         'weather-today': weatherToday,
+        'weather-forecast': weatherForecast,
         'current-time': currentTime,
         'greeting': greeting,
         'headlines': headlines,
