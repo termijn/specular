@@ -26,9 +26,42 @@ exports.get = function(req, res) {
 
         console.log("getWeatherForecast request for " + jsonBody.city.name);
 
-        weatherTodayResult = jsonBody.list;
-        res.send(JSON.stringify(weatherTodayResult));
+        const daily = parse(jsonBody);
+        res.send(JSON.stringify(daily));
+
+        weatherTodayResult = daily;
+        latestWeatherUpdate = new Date();
     });
 }
 
-//api.openweathermap.org/data/2.5/forecast?q={city name},{country code}
+function parse(data) {
+    // days = { date: date, forecasts: [{ dateTime: dateTime, temp: item.main.temp }] };
+    var days = [];
+    
+    data.list.forEach(function(item) {
+
+        var dateTime = new Date(item.dt * 1000);
+
+        var time = dateTime.getTime();
+        var date = new Date(dateTime.setHours(0,0,0,0)).getTime();
+
+        var forecast = { dateTime: time, temp: item.main.temp, icon: item.weather[0].icon };
+        var day = getDay(date, days);
+        
+        if (day == undefined) {
+            days.push({ date: date, forecasts: [forecast] });
+        } 
+        else {
+            day.forecasts.push(forecast);
+        }
+    });
+
+    return days;
+}
+
+function getDay(date, days)
+{
+    return days.find(function(day) {
+        return day.date === date;
+    });
+}

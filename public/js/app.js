@@ -6,23 +6,16 @@ var weatherForecast =
 {
     template: 
         '<div class="weatherforecast-container">'+
-        '   <div> <ol> <li>&nbsp;</li> <li>Ochtend</li> <li>Avond</li> </ol> </div>'+
-        '   <div> <ol> <li>{{days[0].weekday}}</li> <li v-for="forecast in days[0].forecasts"><span> <i class="owi" v-bind:class="forecast.icon"></i>{{ forecast.temp }}&deg;</span> </li> </ol> </div>'+
-        '   <div> <ol> <li>{{days[1].weekday}}</li> <li v-for="forecast in days[1].forecasts"><span> <i class="owi" v-bind:class="forecast.icon"></i>{{ forecast.temp }}&deg;</span> </li> </ol> </div>'+
-        '   <div> <ol> <li>{{days[2].weekday}}</li> <li v-for="forecast in days[2].forecasts"><span> <i class="owi" v-bind:class="forecast.icon"></i>{{ forecast.temp }}&deg;</span> </li> </ol> </div>'+
-        '   <div> <ol> <li>{{days[3].weekday}}</li> <li v-for="forecast in days[3].forecasts"><span> <i class="owi" v-bind:class="forecast.icon"></i>{{ forecast.temp }}&deg;</span> </li> </ol> </div>'+
-        '   <div> <ol> <li>{{days[4].weekday}}</li> <li v-for="forecast in days[4].forecasts"><span> <i class="owi" v-bind:class="forecast.icon"></i>{{ forecast.temp }}&deg;</span> </li> </ol> </div>'+
+        '<table>'+
+        '<tr v-for="line in lines">'+
+        '   <td v-bind:style="{opacity: line.opacity}">{{ line.when }}</td>' +
+        '   <td v-bind:style="{opacity: line.opacity}"><i class="owi" v-bind:class="line.icon"></i></td>' +
+        '   <td v-bind:style="{opacity: line.opacity}">{{ line.temp }}&deg;</td>' +
+        '</tr>'+
+        '</table>'+
         '</div>',
     data: function() {
-        return {
-            days: [
-                { weekday: 'Maandag', forecasts: [ { icon: 'owi-09n', temp: '11', time: 'Ochtend' },{ icon: 'owi-10n', temp: '21', time: 'Avond' } ] },
-                { weekday: 'Dinsdag', forecasts: [ { icon: 'owi-09n', temp: '13', time: 'Ochtend' },{ icon: 'owi-10n', temp: '21', time: 'Avond' } ] },
-                { weekday: 'Woensdag', forecasts: [ { icon: 'owi-08n', temp: '12', time: 'Ochtend' },{ icon: 'owi-10n', temp: '21', time: 'Avond' } ] },
-                { weekday: 'Donderdag', forecasts: [ { icon: 'owi-06n', temp: '10', time: 'Ochtend' },{ icon: 'owi-10n', temp: '21', time: 'Avond' } ] },
-                { weekday: 'Vrijdag', forecasts: [ { icon: 'owi-03n', temp: '9', time: 'Ochtend' },{ icon: 'owi-10n', temp: '21', time: 'Avond' } ] }
-            ]
-        }
+        return { lines: [] }
     },
     mounted: function() {
         this.update();
@@ -32,9 +25,34 @@ var weatherForecast =
             const self = this;
             interval(10 * 60 * 1000, function() {
                 axios.get('/getWeatherForecast')
-                .then(function(response){
-                    
+                .then(function(response){                    
+                    self.parse(response.data);
                 });
+            });
+        },
+        parse: function(days) {
+            const self = this;
+
+            // lines = [ { when, icon, temp } ];
+            var today = days[0];
+            var opacity = 1;
+            today.forecasts.forEach(function(forecast) {                
+                var dateTime = new Date(forecast.dateTime);
+                var hours = dateTime.getHours();
+                var minutes = dateTime.getMinutes();
+                var line = { opacity: opacity, when: hours + ':' + minutes.toLocaleString(undefined, {minimumIntegerDigits: 2}), icon: 'owi-'+forecast.icon, temp: Math.round(forecast.temp) };
+                self.lines.push(line);
+            });
+
+            days.forEach(function(day) {
+                console.log(JSON.stringify(day));
+                if (day.forecasts.length > 4) {
+                    var dateTime = new Date(day.date);
+                    opacity -= 0.15;
+                    if (opacity < 0.0) opacity = 0;
+                    var line = { opacity: opacity, when: weekdayToStr[dateTime.getDay()], icon: 'owi-'+day.forecasts[4].icon, temp: Math.round(day.forecasts[4].temp) };
+                    self.lines.push(line);
+                }
             });
         }
     }    
@@ -113,7 +131,16 @@ var currentTime = {
 var greeting = {
     template: '<div class="message"><transition name="fade"><span v-if="visible">{{message}}</span></transition></div>',
     data: function() {
-        return { message: "Goedemorgen", visible: false };
+        var dateTime = new Date();
+        var hours = dateTime.getHours();
+
+        var result = { message: "Goedemorgen", visible: false };
+        if (hours >= 12 && hours < 18) {
+            result.message = "Goedemiddag";
+        } else if (hours >= 18) {
+            result.message = "Goedenavond";
+        }
+        return result;
     },
     mounted: function() {
         const self = this;
@@ -146,7 +173,7 @@ var headlines = {
             })
         },
         updateCurrent: function() {
-            this.index = this.index + 1 % this.headlines.length;
+            this.index = (this.index + 1) % this.headlines.length;
             this.currentheadline = this.headlines[this.index];
         }
 
