@@ -61,13 +61,6 @@ var weatherForecast =
 var weatherToday =  
 {
     template: '<div class="weathertoday"><i class="owi" v-bind:class="icon"></i> <span>{{ temp }}</span>  <div class="description">{{ description }}</div></div>',
-    /* TODO: use a html builder
-    tag('div', 
-        tag('span','{{ temp }}') +
-        tag('img', {'v-bind:src':'iconurl' })
-    ),
-    */
-    
     data: function() {
         return {
             temp: '',
@@ -197,19 +190,7 @@ var xkcd = {
 var app = new Vue({
     el: '#SpeculumApp',
     data: {
-        time: "",
         show: true,
-        message: 'Goedemorgen',
-        appointments: [
-                { title: "Feestje Kasper", date: "25 augustus" },
-                { title: "Tim spelen", date: "25 augustus" },
-                { title: "Bo breien", date: "25 augustus" }
-            ],
-        days: [
-            { name: 'Maandag', temp: "12" + String.fromCharCode(176) },
-            { name: 'Dinsdag', temp: "12" + String.fromCharCode(176) },
-            { name: 'Woensdag', temp: "12" + String.fromCharCode(176) }
-        ]          
     },
     components: {
         'weather-today': weatherToday,

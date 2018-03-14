@@ -16,6 +16,8 @@ exports.get = function(req, res) {
     function(error, response, body){
         console.log("getWeatherToday request " + error + ' - '  + body);
 
+        if (error) return;
+
         var jsonBody;
         try{
             jsonBody = JSON.parse(body);
