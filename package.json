@@ -25,16 +25,16 @@
   "homepage": "https://github.com/termijn/speculum#readme",
   "dependencies": {
     "axios": "^0.18.0",
+    "browserify": "^16.1.1",
     "express": "^4.16.2",
     "frontend-dependencies": "^1.1.0",
-    "html-tag": "^2.0.0",
     "ical": "^0.5.0",
     "open-weather-icons": "0.0.7",
     "request": "^2.83.0",
     "require": "^2.4.20",
     "rss-url-parser": "^1.0.0",
     "skeleton-css": "^2.0.4",
-    "vue": "^2.5.15"
+    "vue": "^2.5.16"
   },
   "frontendDependencies": {
     "target": "public/dependencies",
@@ -51,11 +51,8 @@
       "axios": {
         "version": "0.18.0"
       },
-      "html-tag": {
-        "version": "2.0.0"
-      },
-      "require": {
-        "version": "2.4.20"
+      "browserify": {
+        "version": "^16.1.1"
       }
     }
   }

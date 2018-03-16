@@ -8,6 +8,11 @@
     text-align: center;
 }
 
+.dimmed
+{
+    opacity: 0.4;
+}
+
 .container
 {
     display: grid;
@@ -15,6 +20,34 @@
     height: 100%;
     grid-auto-rows: 1fr 1fr 1fr;
     grid-template-columns: 1fr 1fr 1fr;
+}
+
+.formula1
+{
+    position: relative;
+    vertical-align: bottom;
+    text-align: left;
+    font-size: 24px;
+}
+
+.formula1 table
+{
+    font-size: 24px;
+    position: absolute;
+    bottom: 50px;
+}
+
+.formula1 table td
+{
+    padding-right: 10px;
+}
+
+.formula1 span
+{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 
 .weatherforecast-container
