@@ -24,7 +24,7 @@ exports.getDriverStandings = function(req, res) {
 
     request(options, 
     function(error, response, body){
-        console.log("f1 getDriverStandings request " + error + ' - '  + JSON.stringify(body));
+        //console.log("f1 getDriverStandings request " + error + ' - '  + JSON.stringify(body));
 
         if (error) return;
         res.send(body);
