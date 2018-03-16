@@ -1,5 +1,7 @@
+import common from './common';
+import axios from '../dependencies/axios/dist/axios';
 
-var formula1 =  {
+export default {
     
     template: 
         '<div class="formula1">'+
@@ -29,14 +31,14 @@ var formula1 =  {
     methods: {
         update: function() {
             const self = this;
-            interval(60 * 60 * 1000, function() {
+            common.interval(60 * 60 * 1000, function() {
                 axios.get('/getFormula1Schedule')
                 .then(function(response) {
                     self.parseSchedule(response.data)
                 });
             });
 
-            interval(60 * 60 * 1000, function() {
+            common.interval(60 * 60 * 1000, function() {
                 axios.get('/getFormula1DriverStandings')
                 .then(function(response) {
                     self.parseDriverStandings(response.data)

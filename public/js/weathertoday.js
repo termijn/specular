@@ -1,4 +1,8 @@
-var weatherToday =  {
+import '../dependencies/open-weather-icons/dist/css/open-weather-icons.css';
+import common from './common'
+import axios from '../dependencies/axios/dist/axios';
+
+export default {
     
     template: '<div class="weathertoday"><i class="owi" v-bind:class="icon"></i> <span>{{ temp }}</span>  <div class="description">{{ description }}</div></div>',
     data: function() {
@@ -14,7 +18,7 @@ var weatherToday =  {
     methods: {
         update: function() {
             const self = this;
-            interval(10 * 60 * 1000, function() {
+            common.interval(10 * 60 * 1000, function() {
                 axios.get('/getWeatherToday')
                 .then(function(response){
                     self.temp = 

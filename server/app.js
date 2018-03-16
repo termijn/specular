@@ -8,7 +8,7 @@ const headlines = require('./headlines');
 const xkcd = require('./xkcd');
 const formula1 = require('./formula1');
 
-app.use(express.static('public'));
+app.use(express.static('dist'));
 app.get('/getWeatherToday', weathertoday.get);
 app.get('/getWeatherForecast', weatherforecast.get);
 app.get('/getHeadlines', headlines.get);

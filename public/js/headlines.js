@@ -1,4 +1,7 @@
-var headlines = {
+import common from './common';
+import axios from '../dependencies/axios/dist/axios';
+
+export default {
 
     template: '<div class="headlines"><transition name="fade"><span v-if="visible"> {{ currentheadline }} </span></transition></div>',
     data: function() {
@@ -10,7 +13,7 @@ var headlines = {
     methods: {
         update: function() {
             const self = this;
-            interval(1000 * 60, function() {
+            common.interval(1000 * 60, function() {
                 axios.get('/getHeadlines')
                 .then(function(response){
                     self.headlines = response.data.headlines;
@@ -18,7 +21,7 @@ var headlines = {
                     self.updateCurrent();
                 });
             });
-            interval(6000, function() {
+            common.interval(6000, function() {
                 self.updateCurrent();
             })
         },

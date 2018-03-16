@@ -1,4 +1,7 @@
-var weatherForecast = {
+import common from './common';
+import axios from '../dependencies/axios/dist/axios';
+
+export default {
 
     template: 
         '<div class="weatherforecast-container">'+
@@ -19,7 +22,7 @@ var weatherForecast = {
     methods: {
         update: function() {
             const self = this;
-            interval(10 * 60 * 1000, function() {
+            common.interval(10 * 60 * 1000, function() {
                 axios.get('/getWeatherForecast')
                 .then(function(response){                    
                     self.parse(response.data);
@@ -37,17 +40,24 @@ var weatherForecast = {
                 var dateTime = new Date(forecast.dateTime);
                 var hours = dateTime.getHours();
                 var minutes = dateTime.getMinutes();
-                var line = { opacity: opacity, when: hours + ':' + minutes.toLocaleString(undefined, {minimumIntegerDigits: 2}), icon: 'owi-'+forecast.icon, temp: Math.round(forecast.temp) };
+                var line = { 
+                    opacity: opacity, 
+                    when: hours + ':' + minutes.toLocaleString(undefined, {minimumIntegerDigits: 2}), 
+                    icon: 'owi-'+forecast.icon, 
+                    temp: Math.round(forecast.temp) };
                 self.lines.push(line);
             });
 
             days.forEach(function(day) {
-                console.log(JSON.stringify(day));
                 if (day.forecasts.length > 4) {
                     var dateTime = new Date(day.date);
                     opacity -= 0.15;
                     if (opacity < 0.0) opacity = 0;
-                    var line = { opacity: opacity, when: weekdayToStr[dateTime.getDay()], icon: 'owi-'+day.forecasts[4].icon, temp: Math.round(day.forecasts[4].temp) };
+                    var line = { 
+                        opacity: opacity, 
+                        when: common.weekdayToStr[dateTime.getDay()], 
+                        icon: 'owi-'+day.forecasts[4].icon, 
+                        temp: Math.round(day.forecasts[4].temp) };
                     self.lines.push(line);
                 }
             });

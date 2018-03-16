@@ -1,4 +1,6 @@
-var xkcd = {
+import axios from '../dependencies/axios/dist/axios';
+
+export default {
     template: '<div class="xkcd"><img v-bind:src="imgurl"></div>',
     data: function() {
         return { imgurl: '' };

@@ -4,6 +4,7 @@
   "description": "Powers a magic mirror",
   "main": "server/app.js",
   "scripts": {
+    "build": "./build.sh",
     "start": "node server/app.js",
     "test": "echo \"No tests specified\"",
     "postinstall": "node ./node_modules/frontend-dependencies/index.js"
@@ -25,7 +26,6 @@
   "homepage": "https://github.com/termijn/speculum#readme",
   "dependencies": {
     "axios": "^0.18.0",
-    "browserify": "^16.1.1",
     "express": "^4.16.2",
     "frontend-dependencies": "^1.1.0",
     "ical": "^0.5.0",
@@ -34,7 +34,8 @@
     "require": "^2.4.20",
     "rss-url-parser": "^1.0.0",
     "skeleton-css": "^2.0.4",
-    "vue": "^2.5.16"
+    "vue": "^2.5.16",
+    "webpack": "^4.1.1"
   },
   "frontendDependencies": {
     "target": "public/dependencies",
@@ -50,10 +51,13 @@
       },
       "axios": {
         "version": "0.18.0"
-      },
-      "browserify": {
-        "version": "^16.1.1"
       }
     }
+  },
+  "devDependencies": {
+    "css-loader": "^0.28.11",
+    "file-loader": "^1.1.11",
+    "style-loader": "^0.20.3",
+    "webpack-cli": "^2.0.12"
   }
 }

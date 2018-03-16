@@ -1,10 +1,13 @@
-const weekdayToStr = ['Zondag', 'Maandag', 'Dinsdag', 'Woensdag', 'Donderdag', 'Vrijdag', 'Zaterdag'];
-const monthToStr = ['januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december'];
+export default {
+     weekdayToStr: ['Zondag', 'Maandag', 'Dinsdag', 'Woensdag', 'Donderdag', 'Vrijdag', 'Zaterdag'],
+     monthToStr: ['januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december'],
 
-function interval(intervalDuration, callback) {
-    callback();
-    setTimeout(function () {
+     interval: function(intervalDuration, callback) {
+        const self = this;
         callback();
-        interval(intervalDuration, callback);
-    }, intervalDuration);
+        setTimeout(function () {
+            callback();
+            self.interval(intervalDuration, callback);
+        }, intervalDuration);
+    }
 }
