@@ -1,5 +1,5 @@
 import common from './common';
-import axios from '../dependencies/axios/dist/axios';
+import axios from '../../node_modules/axios/dist/axios';
 
 export default {
     

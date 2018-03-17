@@ -1,4 +1,4 @@
-import '../dependencies/skeleton-css/css/normalize.css';
+import '../../node_modules/skeleton-css/css/normalize.css';
 import './general.css';
 
 import weatherToday from './weathertoday';
@@ -8,7 +8,7 @@ import greeting from './greeting';
 import formula1 from './formula1';
 import headlines from './headlines';
 import xkcd from './xkcd';
-import vue from '../dependencies/vue/dist/vue';
+import vue from '../../node_modules/vue/dist/vue';
 
 var app = new vue({
 

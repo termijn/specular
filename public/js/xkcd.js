@@ -1,4 +1,4 @@
-import axios from '../dependencies/axios/dist/axios';
+import axios from '../../node_modules/axios/dist/axios';
 
 export default {
     template: '<div class="xkcd"><img v-bind:src="imgurl"></div>',
