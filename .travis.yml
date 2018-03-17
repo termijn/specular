@@ -1,4 +1,4 @@
 language: node_js
 script: 
-  - npm install --global webpack
+  - npm install --global webpack-cli
   - npm run build
