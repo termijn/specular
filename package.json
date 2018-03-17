@@ -6,8 +6,7 @@
   "scripts": {
     "build": "./node_modules/.bin/webpack --config webpack.config.js",
     "start": "node server/app.js",
-    "test": "echo \"No tests specified\"",
-    "postinstall": "node ./node_modules/frontend-dependencies/index.js"
+    "test": "echo \"No tests specified\""
   },
   "repository": {
     "type": "git",
