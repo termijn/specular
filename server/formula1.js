@@ -9,8 +9,6 @@ exports.getSchedule = function(req, res) {
 
     request(options, 
     function(error, response, body){
-        console.log("f1 schedule request " + error + ' - '  + body);
-
         if (error) return;
         res.send(body);
     });
