@@ -2,6 +2,8 @@ import common from './common';
 import axios from '../../node_modules/axios/dist/axios';
 import moment from '../../node_modules/moment/moment';
 
+import '../css/calendar.css';
+
 export default {
     
     template: 
@@ -9,7 +11,7 @@ export default {
             '<transition name="fade">'+
                 '<table v-if="visible">'+
                 '<tr v-for="event in events">'+
-                '   <td class="leftaligned">{{ event.summary}} </td>' +
+                '   <td v-bind:style="{opacity: event.opacity}" class="leftaligned">{{ event.summary}} </td>' +
                 '   <td class="rightaligned dimmed">{{ event.date }}</td>' +
                 '</tr>'+
                 '</table>'+
@@ -32,8 +34,15 @@ export default {
                 .then(function(response) {
                     const eventsList = response.data;
                     self.events = [];
+                    var opacity = 1.0;
                     eventsList.forEach(element => {
-                        var date = moment(element.start.dateTime);
+                        var date;
+                        const hasStartTime = element.start.dateTime !== undefined;
+                        if (hasStartTime)
+                            date = moment(element.start.dateTime);
+                        else
+                            date = moment(element.start.date);
+
                         var now = moment();
 
                         var dateIndication = 
@@ -42,14 +51,29 @@ export default {
                             common.monthToStr[date.month()]
 
                         var tomorrow = now.clone().add(1, 'days');
-                        if (date.startOf('day') == tomorrow.startOf('day'))
-                        {
+                        var startOfDate = date.clone().startOf('day');
+                        if (startOfDate.toISOString() === tomorrow.startOf('day').toISOString()) {
                             dateIndication = "Morgen";
-                        } 
+                        }
+                        else if (startOfDate.toISOString() === now.startOf('day').toISOString()) {
+                            dateIndication = "Vandaag";
+                        }
+
+                        if (hasStartTime) {
+                            dateIndication = 
+                                dateIndication + 
+                                ' om ' + 
+                                date.hour() + 
+                                ':' + 
+                                date.minute().toLocaleString(undefined, {minimumIntegerDigits: 2});
+                        }
+
                         const event = { 
                             date: dateIndication,
-                            summary: element.summary
+                            summary: element.summary,
+                            opacity: opacity
                         }
+                        opacity -= 0.15;
                         self.events.push(event)
                     });
                     self.visible = true;

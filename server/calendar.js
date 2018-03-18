@@ -129,13 +129,10 @@ function authorize(credentials, callback) {
       if (events.length == 0) {
         console.log('No upcoming events found.');
       } else {        
-        console.log('Upcoming 10 events:');
         for (var i = 0; i < events.length; i++) {
           var event = events[i];
           var start = event.start.dateTime || event.start.date;
-          console.log('%s - %s', start, event.summary);
         }
-        console.log('%s', (new Date()).toISOString());
         res.send(JSON.stringify(events));
       }
     });

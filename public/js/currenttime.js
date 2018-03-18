@@ -1,4 +1,5 @@
 import common from './common';
+import '../css/currenttime.css';
 
 export default {
     template: '<div class="date">'+

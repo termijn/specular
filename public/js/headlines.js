@@ -1,9 +1,11 @@
 import common from './common';
 import axios from '../../node_modules/axios/dist/axios';
 
+import '../css/headlines.css';
+
 export default {
 
-    template: '<div class="headlines"><transition name="fade"><span v-if="visible"> {{ currentheadline }} </span></transition></div>',
+    template: '<div class="headlines"><transition name="fade"><span v-if="visible"> {{ currentheadline.title }} - {{ currentheadline.source }} </span></transition></div>',
     data: function() {
         return { visible: true, currentheadline: '', index: 0, headlines: [] }
     },
@@ -16,7 +18,7 @@ export default {
             common.interval(1000 * 60, function() {
                 axios.get('/getHeadlines')
                 .then(function(response){
-                    self.headlines = response.data.headlines;
+                    self.headlines = response.data;
                     self.index = 0;
                     self.updateCurrent();
                 });

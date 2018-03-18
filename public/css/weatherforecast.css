@@ -1,0 +1,20 @@
+.weatherforecast-container
+{
+    position: relative;
+    text-align: right;
+}
+
+.weatherforecast-container table
+{
+    font-size: 24px;
+    position: absolute;
+    right: 0px;
+}
+
+.weatherforecast-container table tr td
+{    
+    padding: 5px;
+    border: none;
+    list-style: none;   
+    text-align: right;     
+}

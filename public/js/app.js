@@ -1,5 +1,5 @@
 import '../../node_modules/skeleton-css/css/normalize.css';
-import './general.css';
+import '../css/app.css';
 
 import vue from '../../node_modules/vue/dist/vue';
 

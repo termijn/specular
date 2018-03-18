@@ -2,6 +2,8 @@ import common from './common';
 import '../../node_modules/open-weather-icons/dist/css/open-weather-icons.css';
 import axios from '../../node_modules/axios/dist/axios';
 
+import '../css/weatherforecast.css';
+
 export default {
 
     template: 

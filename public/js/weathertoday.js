@@ -1,6 +1,7 @@
 import '../../node_modules/open-weather-icons/dist/css/open-weather-icons.css';
 import common from './common'
 import axios from '../../node_modules/axios/dist/axios';
+import '../css/weathertoday.css';
 
 export default {
     

@@ -1,0 +1,14 @@
+.headlines
+{
+    position: relative;
+    vertical-align: bottom;
+    font-size: 32px;
+}
+
+.headlines span
+{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}

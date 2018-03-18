@@ -1,6 +1,8 @@
 import common from './common';
 import axios from '../../node_modules/axios/dist/axios';
 
+import '../css/formula1.css';
+
 export default {
     
     template: 

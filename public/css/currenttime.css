@@ -1,0 +1,9 @@
+div.date
+{
+    text-align: left;
+}
+
+div.date .time
+{
+    font-size: 72px;
+}
