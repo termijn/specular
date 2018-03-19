@@ -9,12 +9,12 @@ export default {
     template: 
         '<div class="calendar">'+
             '<transition name="fade">'+
-                '<table v-if="visible">'+
-                '<tr v-for="event in events">'+
-                '   <td v-bind:style="{opacity: event.opacity}" class="leftaligned">{{ event.summary}} </td>' +
-                '   <td class="rightaligned dimmed">{{ event.date }}</td>' +
-                '</tr>'+
-                '</table>'+
+                '<div v-if="visible">'+
+                '<div v-for="event in events">'+
+                '   <div v-bind:style="{opacity: event.opacity}" class="leftaligned eventsummary">{{ event.summary}} </div>' +
+                '   <div v-bind:style="{opacity: event.opacity * 0.5}" class="leftaligned eventdate">{{ event.date }}</div>' +
+                '</div>'+
+                '</div>'+
             '</transition>'+
         '</div>',
     data: function() {

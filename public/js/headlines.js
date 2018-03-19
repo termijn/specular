@@ -5,7 +5,9 @@ import '../css/headlines.css';
 
 export default {
 
-    template: '<div class="headlines"><transition name="fade"><span v-if="visible"> {{ currentheadline.title }} - {{ currentheadline.source }} </span></transition></div>',
+    template: 
+        '<div class="headlines"><transition name="fade">'+
+        '<div v-if="visible"> <span> {{ currentheadline.title }} </span> <span class="dimmed">{{ currentheadline.source }}</span> </div></transition></div>',
     data: function() {
         return { visible: true, currentheadline: '', index: 0, headlines: [] }
     },
