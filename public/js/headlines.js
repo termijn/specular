@@ -17,11 +17,11 @@ export default {
     methods: {
         update: function() {
             const self = this;
-            common.interval(1000 * 60, function() {
+            common.interval(1000 * 60 * 10, function() {
                 axios.get('/getHeadlines')
                 .then(function(response){
                     self.headlines = response.data;
-                    self.index = 0;
+                    self.index = -1;
                     self.updateCurrent();
                 });
             });
@@ -30,6 +30,8 @@ export default {
             })
         },
         updateCurrent: function() {
+            if (this.headlines.length == 0) return;
+
             self = this;
             this.visible = false;
             this.index = (this.index + 1) % this.headlines.length;
@@ -38,6 +40,5 @@ export default {
                 self.visible = true;
             }, 800);
         }
-
     }
 }
