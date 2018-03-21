@@ -1,20 +1,20 @@
 .calendar
 {
-    position: relative;
-    vertical-align: bottom;
     text-align: left;
-    font-size: 24px;
+    font-size: 1em;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 .calendar .eventdate
 {
-    font-size: 18px;
+    font-size: 0.8em;
     margin-bottom: 8px;
 }
 
 .calendar table
 {
-    font-size: 24px;
+    font-size: 1em;
     position: absolute;
     bottom: 50px;
 }

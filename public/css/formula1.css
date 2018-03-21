@@ -3,19 +3,18 @@
     position: relative;
     vertical-align: bottom;
     text-align: left;
-    font-size: 18px;
 }
 
 .formula1 table
 {
-    font-size: 18px;
+    font-size: 0.8em;
     position: absolute;
     bottom: 50px;
 }
 
 .formula1 table td
 {
-    padding-right: 10px;
+    padding-right: 0.8em;
 }
 
 .formula1 span
@@ -24,4 +23,5 @@
     bottom: 0;
     left: 0;
     right: 0;
+    font-size: 0.8em;
 }

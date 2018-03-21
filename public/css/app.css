@@ -22,8 +22,6 @@
     grid-template-columns: 1fr 1fr 1fr;
 }
 
-
-
 .leftaligned
 {
     text-align: left;
@@ -44,29 +42,6 @@ body
     font-size: 24px;
     -webkit-font-smoothing: antialiased;
     -webkit-text-stroke: 1px;
-}
-
-.xkcd
-{    
-    position: relative;
-}
-
-.xkcd img
-{
-    box-sizing: content-box;
-    
-    height: 100%;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    filter: invert(100%);
-}
-
-.message
-{
-    font-size: 64px;
-    margin-top: auto;
-    margin-bottom: auto;
 }
 
 .fade-enter-active {

@@ -5,7 +5,7 @@ import '../css/weathertoday.css';
 
 export default {
     
-    template: '<div class="weathertoday"><i class="owi" v-bind:class="icon"></i> <span>{{ temp }}</span>  <div class="description">{{ description }}</div></div>',
+    template: '<div class="weathertoday"><i class="owi" v-bind:class="icon"></i> <span class="temp">{{ temp }}</span>  <div class="description">{{ description }}</div></div>',
     data: function() {
         return {
             temp: '',

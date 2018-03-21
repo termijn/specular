@@ -1,3 +1,5 @@
+import '../css/greeting.css';
+
 export default {
     template: '<div class="message"><transition name="fade"><span v-if="visible">{{message}}</span></transition></div>',
     data: function() {
