@@ -1,5 +1,5 @@
 {
-  "name": "speculum",
+  "name": "specular",
   "version": "0.0.1",
   "description": "Powers a magic mirror",
   "main": "server/app.js",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/termijn/speculum.git"
+    "url": "git+https://github.com/termijn/specular.git"
   },
   "keywords": [
     "mirror",
@@ -20,9 +20,9 @@
   "author": "Martijn van Geloof",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/termijn/speculum/issues"
+    "url": "https://github.com/termijn/specular/issues"
   },
-  "homepage": "https://github.com/termijn/speculum#readme",
+  "homepage": "https://github.com/termijn/specular#readme",
   "dependencies": {
     "dav": "^1.7.8",
     "express": "^4.16.2",

@@ -1,18 +1,18 @@
-# Speculum Smart Mirror
+# Specular Smart Mirror
 Project for powering a magic mirror
 
-[![Build Status](https://travis-ci.org/termijn/speculum.svg?branch=develop)](https://travis-ci.org/termijn/speculum)
+[![Build Status](https://travis-ci.org/termijn/speculum.svg?branch=develop)](https://travis-ci.org/termijn/specular)
 
-![Speculum smart](.github/header.png)
+![Specular smart mirror](.github/header.png)
 
 ## Current features
 - Current Date / Time 
 - Display news headlines
 - Current weather from OpenWeatherMap
 - Weather forecast from OpenWeatherMap
-- Formula 1 standings and upcoming grandprix counter
+- Formula 1 standings and upcoming grand prix counter
 - Today's xkcd comic
-- Google calendar
+- Google calendar upcoming events
 
 ## Dependencies
 - Express 4.16.2
@@ -21,4 +21,3 @@ Project for powering a magic mirror
 - Skeleton-css
 - Open weather icons
 - Webpack
-
