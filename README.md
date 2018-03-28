@@ -1,7 +1,7 @@
 # Specular Smart Mirror
 Project for powering a magic mirror
 
-[![Build Status](https://travis-ci.org/termijn/speculum.svg?branch=develop)](https://travis-ci.org/termijn/specular)
+[![Build Status](https://travis-ci.org/termijn/specular.svg?branch=develop)](https://travis-ci.org/termijn/specular)
 
 ![Specular smart mirror](.github/header.png)
 
