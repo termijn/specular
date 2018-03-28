@@ -19,4 +19,4 @@ app.get('/getFormula1DriverStandings', formula1.getDriverStandings);
 app.get('/getCalendar', calendar.get);
 
 const port = 8095;
-app.listen(port, () => console.log('Speculum Smart Mirror server listening on port ' + port));
+app.listen(port, () => console.log('Specular Smart Mirror server listening on port ' + port));

@@ -7,32 +7,31 @@ exports.get = function(req, res) {
 
     var elapsedSinceLatestWeatherUpdate = new Date(Date() - latestWeatherUpdate);
 
-    if (weatherTodayResult != null || elapsedSinceLatestWeatherUpdate.getMinutes() > 10) {
+    if (weatherTodayResult != null && elapsedSinceLatestWeatherUpdate.getMinutes() < 10) {
         var responseBody = JSON.stringify(weatherTodayResult);
         res.send(responseBody);
         return;
     }
 
-
     request('http://api.openweathermap.org/data/2.5/forecast?q=Olland,NL&units=metric&lang=nl&APPID=af4e90c5fa4b97bc975f49656739adaf', 
-    function(error, response, body){
-        
-        if (error) return;
-        var jsonBody;
-        try{
-            jsonBody = JSON.parse(body);
-        } catch (ex) {
-            res.send("");
-        }
+        function(error, response, body){
+            
+            if (error) return;
+            var jsonBody;
+            try{
+                jsonBody = JSON.parse(body);
+            } catch (ex) {
+                res.send("");
+            }
 
-        console.log("getWeatherForecast request for " + jsonBody.city.name);
+            console.log("getWeatherForecast " + body);
 
-        const daily = parse(jsonBody);
-        res.send(JSON.stringify(daily));
+            const daily = parse(jsonBody);
+            res.send(JSON.stringify(daily));
 
-        weatherTodayResult = daily;
-        latestWeatherUpdate = new Date();
-    });
+            weatherTodayResult = daily;
+            latestWeatherUpdate = new Date();
+        });
 }
 
 function parse(data) {

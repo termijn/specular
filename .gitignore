@@ -2,3 +2,4 @@
 /node_modules/*
 /public/dependencies/*
 /server/client_secret.json
+/.vscode/*

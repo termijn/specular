@@ -30,8 +30,9 @@ export default {
         update: function() {
             const self = this;
             common.interval(0.5 * 60 * 1000, function() {
-                axios.get('/getCalendar')
-                .then(function(response) {
+                let promise = axios.get('/getCalendar');
+                promise.catch(function(err) { console.log("No calendar events"); });
+                promise.then(function(response) {
                     const eventsList = response.data;
                     self.events = [];
                     var opacity = 1.0;

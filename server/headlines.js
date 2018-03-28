@@ -44,14 +44,6 @@ exports.get = function(req, res) {
                 headlineIndex++;
             }
         }
-
-        /*
-        results.forEach(data => {
-            data.forEach(element => {                
-                headlines.push({title: element.title, source: element.meta.title});
-            });
-        });
-*/
         var responseBody = JSON.stringify(headlines);
         res.send(responseBody);
     });

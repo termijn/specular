@@ -15,7 +15,7 @@ import calendar from './calendar';
 
 var app = new vue({
 
-    el: '#SpeculumApp',
+    el: '#SpecularApp',
     components: {
         'weather-today': weatherToday,
         'weather-forecast': weatherForecast,

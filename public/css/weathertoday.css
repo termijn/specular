@@ -5,7 +5,7 @@ div.weathertoday
 }
 div.weathertoday i
 {
-    vertical-align: middle;
+    vertical-align: bottom;
     font-size: 3em;
 }
 

@@ -6,7 +6,7 @@ var latestWeatherUpdate = Date();
 exports.get = function(req, res) {
     var elapsedSinceLatestWeatherUpdate = new Date(Date() - latestWeatherUpdate);
 
-    if (weatherTodayResult != null || elapsedSinceLatestWeatherUpdate.getMinutes() > 10) {
+    if (weatherTodayResult != null && elapsedSinceLatestWeatherUpdate.getMinutes() < 10) {
         var responseBody = JSON.stringify(weatherTodayResult);
         res.send(responseBody);
         return;
