@@ -44,6 +44,20 @@ body
     -webkit-text-stroke: 1px;
 }
 
+@media only screen and (max-width: 1024px) {
+    body {
+        font-size: 18px;
+        margin: 32px;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    body {
+        font-size: 10px;
+        margin: 8px;
+    }
+}
+
 .fade-enter-active {
     transition: all 4s ease;
 }
