@@ -1,0 +1,14 @@
+div.eyecandy
+{
+    position: relative;
+    vertical-align: top;
+    text-align: center;
+}
+
+div.eyecandy img
+{
+    border: 0px;
+    max-height: 250px;
+    max-width: 100%;
+    object-fit: contain;
+}

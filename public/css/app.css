@@ -1,7 +1,22 @@
-@font-face {
-    font-family: "HelveticaNeue-UltraLight"; 
-    src: url("../fonts/HelveticaNeue-UltraLight.ttf");
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400');
+/*@import url('https://fonts.googleapis.com/css?family=Raleway');*/
+
+
+
+body
+{    
+    font-family: 'Source Sans Pro' !important;
+    font-weight: 300;
+    background-color: black !important;
+    /*color: #85abd1 !important;*/
+    color: #FFF !important;
+    text-align: center !important;
+    margin: 64px;
+    font-size: 24px;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke: 1px;
 }
+
 
 .centered
 {
@@ -18,8 +33,8 @@
     display: grid;
     width: 100%;
     height: 100%;
-    grid-auto-rows: 1fr 1fr 1fr;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-auto-rows: 33% 33% 33%;
+    grid-template-columns: 33% 33% 33%;
 }
 
 .leftaligned
@@ -30,18 +45,6 @@
 .rightaligned
 {
     text-align: right;
-}
-
-body
-{
-    font-family: 'HelveticaNeue-UltraLight' !important;
-    background-color: black !important;
-    color: #FFF !important;
-    text-align: center !important;
-    margin: 64px;
-    font-size: 24px;
-    -webkit-font-smoothing: antialiased;
-    -webkit-text-stroke: 1px;
 }
 
 @media only screen and (max-width: 1024px) {

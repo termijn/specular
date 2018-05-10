@@ -13,6 +13,8 @@ Project for powering a magic mirror
 - Formula 1 standings and upcoming grand prix counter
 - Today's xkcd comic
 - Google calendar upcoming events
+- Random animated gifs
+- Simple gesture control using 4 infrared sensors
 
 ## Dependencies
 - Express 4.16.2

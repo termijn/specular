@@ -6,10 +6,12 @@ import '../css/weathertoday.css';
 export default {
     
     template: '<div class="weathertoday"><i class="owi" v-bind:class="icon"></i> <span class="temp">{{ temp }}</span>  <div class="description">{{ description }}</div></div>',
+    //template: '<div class="weathertoday"><img v-bind:src="iconpng"> <span class="temp">{{ temp }}</span>  <div class="description">{{ description }}</div></div>',
     data: function() {
         return {
             temp: '',
             icon: '',
+            iconpng: '',
             description: ''
         };
     },
@@ -26,6 +28,7 @@ export default {
                         response.data.temperature + 
                         String.fromCharCode(176);
                     self.icon = "owi-" + response.data.icon;
+                    self.iconpng = "http://openweathermap.org/img/w/" + response.data.icon + ".png";
                     self.description = response.data.description;
                 });
             });

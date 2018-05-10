@@ -10,7 +10,7 @@ import greeting from './greeting';
 import formula1 from './formula1';
 import headlines from './headlines';
 import xkcd from './xkcd';
-
+import eyecandy from './eyecandy';
 import calendar from './calendar';
 
 var app = new vue({
@@ -24,7 +24,8 @@ var app = new vue({
         'formula1': formula1,
         'headlines': headlines,
         'xkcd': xkcd,
-        'calendar': calendar
+        'calendar': calendar,
+        'eyecandy': eyecandy
     }
 
 });

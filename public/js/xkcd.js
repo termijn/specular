@@ -2,7 +2,7 @@ import axios from '../../node_modules/axios/dist/axios';
 import '../css/xkcd.css';
 
 export default {
-    template: '<div class="xkcd"><img v-bind:src="imgurl"></div>',
+    template: '<div class="xkcd" onerror="this.style.display=\'none\"><img v-bind:src="imgurl"></div>',
     data: function() {
         return { imgurl: '', alt: '' };
     },

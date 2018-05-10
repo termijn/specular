@@ -1,7 +1,7 @@
 {
   "name": "specular",
   "version": "0.0.1",
-  "description": "Powers a magic mirror",
+  "description": "Powers a smart mirror",
   "main": "server/app.js",
   "scripts": {
     "build": "./node_modules/.bin/webpack --config webpack.config.js",
@@ -14,7 +14,8 @@
   },
   "keywords": [
     "mirror",
-    "magicmirror",
+    "smartmirror",
+    "iot",
     "node"
   ],
   "author": "Martijn van Geloof",

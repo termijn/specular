@@ -51,18 +51,25 @@ export default {
                 self.lines.push(line);
             });
 
+            days.splice(0, 1);
+
             days.forEach(function(day) {
-                if (day.forecasts.length > 4) {
-                    var dateTime = new Date(day.date);
-                    opacity -= 0.15;
-                    if (opacity < 0.0) opacity = 0;
-                    var line = { 
-                        opacity: opacity, 
-                        when: common.weekdayToStr[dateTime.getDay()], 
-                        icon: 'owi-'+day.forecasts[4].icon, 
-                        temp: Math.round(day.forecasts[4].temp) };
-                    self.lines.push(line);
-                }
+                var forecast = false;
+                day.forecasts.forEach(function(f){
+                    if (!forecast || f.temp > forecast.temp) {
+                        forecast = f;
+                    }
+                });
+
+                var dateTime = new Date(day.date);
+                opacity -= 0.15;
+                if (opacity < 0.0) opacity = 0;
+                var line = { 
+                    opacity: opacity, 
+                    when: common.weekdayToStr[dateTime.getDay()], 
+                    icon: 'owi-'+forecast.icon, 
+                    temp: Math.round(forecast.temp) };
+                self.lines.push(line);
             });
         }
     }    
