@@ -1,16 +1,14 @@
 .formula1
 {
-    position: relative;
-    vertical-align: bottom;
-    text-align: left;
-    opacity: 0.7;
+    text-align: center;
+
 }
 
 .formula1 table
 {
     font-size: 0.6em;
-    position: absolute;
-    bottom: 50px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .formula1 table td
@@ -18,11 +16,8 @@
     padding-right: 0.6em;
 }
 
-.formula1 span
+.formula1 div
 {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    margin-top: 1em;
     font-size: 0.6em;
 }

@@ -24,7 +24,7 @@ exports.get = function(req, res) {
                 res.send("");
             }
 
-            console.log("getWeatherForecast " + body);
+            //console.log("getWeatherForecast " + body);
 
             const daily = parse(jsonBody);
             res.send(JSON.stringify(daily));

@@ -2,6 +2,7 @@ var fs = require('fs');
 var readline = require('readline');
 var google = require('googleapis');
 var googleAuth = require('google-auth-library');
+var moment = require('moment');
 
 // If modifying these scopes, delete your previously saved credentials
 // at ~/.credentials/calendar-nodejs-quickstart.json
@@ -100,41 +101,85 @@ function authorize(credentials, callback) {
     fs.writeFile(TOKEN_PATH, JSON.stringify(token));
     console.log('Token stored to ' + TOKEN_PATH);
   }
+
+  function getEvents(auth, calendarId)
+  {
+    return new Promise(function(resolve, reject) {
+      let calendar = google.calendar('v3');
+
+      calendar.events.list({
+          auth: auth,
+          calendarId: calendarId
+        }, 
+        { 
+            qs: {
+                timeMin: (new Date()).toISOString(),
+                singleEvents: true,
+                orderBy: 'startTime',
+                maxResults: 6
+            } 
+        },
+        function(err, response) {
+          console.log('getEvents response  ' + JSON.stringify(response));
   
+          if (err) {
+            console.log('The API returned an error: ' + err);
+            resolve([]);
+            return;
+          }
+          var events = response.items;
+          if (events.length == 0) {
+            console.log('No upcoming events found.');
+            resolve([]);
+          } else {        
+            resolve(events);
+          }
+        }
+      );
+    }); 
+  }
+
+  function getDate(item)
+  {
+    const hasStartTime = item.start.dateTime !== undefined;
+    if (hasStartTime)
+        return moment(item.start.dateTime);
+    else
+        return moment(item.start.date);
+  }
+
+  function sortEvents(items)
+  {
+    items.sort(function(a, b) { 
+      return getDate(a) - getDate(b);
+    });    
+  }
+
   /**
    * Lists the next 10 events on the user's primary calendar.
    *
    * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
    */
   function listEvents(auth, res) {
-    var calendar = google.calendar('v3');
-    calendar.events.list({
-      auth: auth,
-      calendarId: 'primary'
-    }, 
-    { 
-        qs: {
-            timeMin: (new Date()).toISOString(),
-            singleEvents: true,
-            orderBy: 'startTime',
-            maxResults: 6
-        } 
-    },
-    function(err, response) {
-      if (err) {
-        console.log('The API returned an error: ' + err);
-        return;
-      }
-      var events = response.items;
-      if (events.length == 0) {
-        console.log('No upcoming events found.');
-      } else {        
-        for (var i = 0; i < events.length; i++) {
-          var event = events[i];
-          var start = event.start.dateTime || event.start.date;
-        }
-        res.send(JSON.stringify(events));
-      }
+    let promises = [
+      getEvents(auth, 'primary'),
+      getEvents(auth, encodeURIComponent('nl.dutch#holiday@group.v.calendar.google.com'))
+    ];
+
+    Promise.all(promises).then(function(result){
+      var allEvents = flatten(result);
+      sortEvents(allEvents);
+      var upcomingEvents = allEvents.slice(0, 6);
+      res.send(JSON.stringify(upcomingEvents));
     });
   }
 
+  function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
+  function flatten(arr) {
+    return arr.reduce(function (flat, toFlatten) {
+      return flat.concat(Array.isArray(toFlatten) ? flatten(toFlatten) : toFlatten);
+    }, []);
+  }

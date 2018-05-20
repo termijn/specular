@@ -12,6 +12,7 @@ import headlines from './headlines';
 import xkcd from './xkcd';
 import eyecandy from './eyecandy';
 import calendar from './calendar';
+import slider from './slider';
 
 var app = new vue({
 
@@ -25,7 +26,8 @@ var app = new vue({
         'headlines': headlines,
         'xkcd': xkcd,
         'calendar': calendar,
-        'eyecandy': eyecandy
+        'eyecandy': eyecandy,
+        'slider': slider
     }
 
 });

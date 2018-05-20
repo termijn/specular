@@ -15,7 +15,7 @@ export default {
         '   <td >{{ standing.points}}</td>' +        
         '</tr>'+
         '</table>'+
-        '<transition name="fade"><span v-if="visible">Nog {{duration}} dagen tot <i>{{name}}</i></span></transition>'+
+        '<div v-if="visible">Nog {{duration}} dagen tot <i>{{name}}</i></div>'+
         '</div>',
     data: function() {
         return {

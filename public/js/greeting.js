@@ -12,11 +12,12 @@ export default {
         } else if (hours >= 18) {
             result.message = "Goedenavond";
         }
+        result.visible = true;
         return result;
     },
     mounted: function() {
         const self = this;
-        setTimeout(function(){self.visible = true;}, 100);
+        //setTimeout(function(){self.visible = true;}, 100);
         setTimeout(function(){self.visible = false;}, 5000);
     }
 }

@@ -14,7 +14,7 @@ exports.get = function(req, res) {
 
     request('http://api.openweathermap.org/data/2.5/weather?q=Olland,NL&units=metric&lang=nl&APPID=af4e90c5fa4b97bc975f49656739adaf', 
     function(error, response, body){
-        console.log("getWeatherToday request " + error + ' - '  + body);
+        //console.log("getWeatherToday request " + error + ' - '  + body);
 
         if (error) return;
 

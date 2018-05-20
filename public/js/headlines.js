@@ -7,7 +7,7 @@ export default {
 
     template: 
         '<div class="headlines"><transition name="fade">'+
-        '<div v-if="visible"> <span> {{ currentheadline.title }} </span> <span class="dimmed">{{ currentheadline.source }}</span> </div></transition></div>',
+        '<div v-if="visible"><span class="dimmed">{{ currentheadline.source }}</span> <br/> <span> {{ currentheadline.title }} </span>  </div></transition></div>',
     data: function() {
         return { visible: true, currentheadline: '', index: 0, headlines: [] }
     },
@@ -17,7 +17,7 @@ export default {
     methods: {
         update: function() {
             const self = this;
-            common.interval(1000 * 60 * 10, function() {
+            common.interval(10 * 60 * 1000, function() {
                 axios.get('/getHeadlines')
                 .then(function(response){
                     self.headlines = response.data;
@@ -25,7 +25,7 @@ export default {
                     self.updateCurrent();
                 });
             });
-            common.interval(6000, function() {
+            common.interval(10 * 1000, function() {
                 self.updateCurrent();
             })
         },

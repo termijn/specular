@@ -1,15 +1,11 @@
 .xkcd
 {    
-    position: relative;
 }
 
 .xkcd img
 {
     box-sizing: content-box;
     
-    height: 100%;
-    position: absolute;
-    bottom: 0;
-    right: 0;
+    height: 100%;    
     filter: invert(100%);
 }

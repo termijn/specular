@@ -1,0 +1,6 @@
+.photos img
+{
+    box-sizing: content-box;    
+    height: 100%;    
+    box-shadow: 0 0 8px 8px black inset;
+}

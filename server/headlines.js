@@ -4,7 +4,10 @@ const fs = require('fs');
 
 const feeds = [
     {url: 'http://feeds.nos.nl/nosnieuwsalgemeen', source: 'NOS nieuws'},
-    {url: 'http://www.rtlnieuws.nl/service/rss/nederland/index.xml', source: 'RTL nieuws'}
+    {url: 'https://news.google.com/news/rss/?ned=nl_nl&gl=NL&hl=nl', source: 'Google News - Algemeen'},
+    {url: 'https://news.google.com/news/rss/search/section/q/formule%201/formule%201?hl=nl&gl=NL&ned=nl_nl', source: 'Google News - Formule 1'},
+    {url: 'https://news.google.com/news/rss/search/section/q/zonnepanelen/zonnepanelen?hl=nl&gl=NL&ned=nl_nl', source: 'Google News - Zonnepanelen'}
+    
 ];
 
 exports.get = function(req, res) {
@@ -32,8 +35,9 @@ exports.get = function(req, res) {
 
             const feedResult = results[feedIndex];
             if (headlineIndex < feedResult.length) {
-                const headline = {title: feedResult[headlineIndex].title, source: feedResult[headlineIndex].meta.title}
-                console.log(JSON.stringify(headline));
+                const source = feeds[feedIndex].source;
+                const headline = {title: feedResult[headlineIndex].title, source: source}
+                //console.log(JSON.stringify(headline));
                 headlines.push(headline);
             }            
 

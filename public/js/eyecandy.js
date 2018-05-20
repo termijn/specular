@@ -4,20 +4,16 @@ import '../css/eyecandy.css';
 export default {
     template: 
         '<div class="eyecandy">'+
-            '<transition name="fade">'+
-                '<div v-if="visible">'+
-                    '<img v-bind:src="imgurl">'+ 
-                '</div>' +
-            '</transition>' +
+            '<div v-if="visible">'+
+                '<img v-bind:src="imgurl">'+ 
+            '</div>' +
         '</div>',
     data: function() {
         return { 
-            visible: false,
+            visible: true,
             imgurl: '', 
             alt: '',
             urls: [
-                'http://www.picgifs.com/graphics/e/eyes/graphics-eyes-662258.gif',
-                'http://www.picgifs.com/graphics/e/eyes/graphics-eyes-449207.gif',
                 'https://media.giphy.com/media/l2SpYymt1W1pkqb5e/giphy.gif',
                 'https://www.collater.al/wp-content/uploads/2013/11/ma_face_mid.gif',
                 'https://s-media-cache-ak0.pinimg.com/originals/b4/30/e8/b430e8fbe229dd7b3f3e935c3c9ef730.gif',
@@ -50,7 +46,6 @@ export default {
                 'http://bestanimations.com/Humans/Skulls/skull-animation-gif-2.gif',
                 'http://www.gifimagesdownload.com/wp-content/uploads/2016/02/best-cool-gifs-773.gif',
                 'https://static.tumblr.com/fc536f36bf2da8ddb6374ba63a89a479/wslnmk1/EvLo1xgf0/tumblr_static_tumblr_static_filename_640.gif',
-                'http://orig02.deviantart.net/f176/f/2008/348/f/7/smiley_face_gif_by_sookie_by_sookiesooker.gif',
                 'http://static.giga.de/wp-content/uploads/2015/05/face-red-loop-15.emoji_-rcm320x0.gif',
                 'https://media.giphy.com/media/l2QDPFF5sQspEy4Q8/giphy.gif',
                 'https://media.giphy.com/media/l0HlVlr2guJQmQf5e/giphy.gif',
@@ -63,14 +58,18 @@ export default {
     mounted: function() {
         const self = this;
         
+        const random = Math.random();
+        const index = Math.trunc(random * self.urls.length);
+        console.log("EyeCandy index = " + index);
+        console.log("EyeCandy url = " + self.urls[index]);
+        self.imgurl = self.urls[index];
+
+        /*
         common.interval(20 * 1000, function(){
             self.visible = false;
-            const random = Math.random();
-            const index = Math.trunc(random * self.urls.length);
-            console.log("EyeCandy index = " + index);
-            console.log("EyeCandy url = " + self.urls[index]);
-            self.imgurl = self.urls[index];
+            
             setInterval(function() {self.visible = true;}, 10000);
         });
+        */
     }
 }

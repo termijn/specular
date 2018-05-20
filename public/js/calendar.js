@@ -74,7 +74,7 @@ export default {
                             summary: element.summary,
                             opacity: opacity
                         }
-                        opacity -= 0.15;
+                        opacity -= 0.10;
                         self.events.push(event)
                     });
                     self.visible = true;
