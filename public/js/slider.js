@@ -19,12 +19,22 @@ export default {
         return result;
     },
     mounted: function() {
-        const self = this;
-        common.interval(10 * 1000, function() {
+        this.nextWidget();
+    },
+    methods: {
+        nextWidget: function() {
+            const self = this;
             self.visible = false;
             self.currentcomponent = self.components[self.currentindex];
             self.currentindex = (self.currentindex + 1) % self.components.length;
-            setTimeout(function() {self.visible = true;}, 2000)
-        });
+            
+            const duration = typeof self.currentcomponent.duration !== 'undefined' ? self.currentcomponent.duration : 10 * 1000;
+            setTimeout(function() {
+                self.visible = true;
+                setTimeout(function() {
+                    self.nextWidget();
+                }, duration);
+            }, 1000);
+        }
     }
 }

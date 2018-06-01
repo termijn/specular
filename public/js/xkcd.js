@@ -3,8 +3,9 @@ import '../css/xkcd.css';
 
 export default {
     template: '<div class="xkcd"> <img v-bind:src="imgurl"></div>',
+    duration: 30 * 1000,
     data: function() {
-        return { imgurl: '', alt: '' };
+        return { imgurl: '', alt: ''};
     },
     mounted: function() {
         const self = this;

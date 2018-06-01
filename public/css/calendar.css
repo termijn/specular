@@ -24,3 +24,13 @@
     padding-right: 12px;
     padding-bottom: 12px;
 }
+
+.eventblock
+{
+    width: 0.5em;
+    height: 0.5em;
+    display: inline-block;
+    margin-left: -0.7em;
+    padding-right: 0.5em;
+    padding: 0;
+}

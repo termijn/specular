@@ -11,8 +11,8 @@ export default {
             '<transition name="fade">'+
                 '<div v-if="visible">'+
                 '<div v-for="event in events">'+
-                '   <div v-bind:style="{opacity: event.opacity}" class="leftaligned eventsummary">{{ event.summary}} </div>' +
-                '   <div v-bind:style="{opacity: event.opacity * 0.5}" class="leftaligned eventdate">{{ event.date }}</div>' +
+                '   <div v-bind:style="{opacity: event.opacity}" class="leftaligned eventsummary"> <div class="eventblock" v-bind:style="{background: event.color}"></div>  {{ event.summary}} </div>' +
+                '   <div v-bind:style="{opacity: event.opacity * 0.6}" class="leftaligned eventdate">{{ event.date }}</div>' +
                 '</div>'+
                 '</div>'+
             '</transition>'+
@@ -69,9 +69,12 @@ export default {
                                 date.minute().toLocaleString(undefined, {minimumIntegerDigits: 2});
                         }
 
+                        //console.log(element.color);
+
                         const event = { 
                             date: dateIndication,
                             summary: element.summary,
+                            color: element.color.background,
                             opacity: opacity
                         }
                         opacity -= 0.10;

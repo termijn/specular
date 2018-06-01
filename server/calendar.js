@@ -102,6 +102,19 @@ function authorize(credentials, callback) {
     console.log('Token stored to ' + TOKEN_PATH);
   }
 
+  function getColors(auth) {
+    return new Promise(function(resolve, reject) {
+      let calendar = google.calendar('v3');
+
+      calendar.colors.get( {auth: auth} , function(err, response) {
+        if (err)
+          resolve({});
+        else
+          resolve(response.calendar);
+      });
+    });
+  }
+
   function getEvents(auth, calendarId)
   {
     return new Promise(function(resolve, reject) {
@@ -120,7 +133,7 @@ function authorize(credentials, callback) {
             } 
         },
         function(err, response) {
-          console.log('getEvents response  ' + JSON.stringify(response));
+          //console.log('getEvents response  ' + JSON.stringify(response));
   
           if (err) {
             console.log('The API returned an error: ' + err);
@@ -166,10 +179,33 @@ function authorize(credentials, callback) {
       getEvents(auth, encodeURIComponent('nl.dutch#holiday@group.v.calendar.google.com'))
     ];
 
+    let colorPalette = 
+    {
+      '1': {background: '#A4BDFC'},
+      '2': {background: '#7AE7BF'},
+      '3': {background: '#DBADFF'},
+      '4': {background: '#FF887C'},
+      '5': {background: '#FBD75B'},
+      '6': {background: '#FFB878'},
+      '7': {background: '#46D6DB'},
+      '8': {background: '#E1E1E1'},
+      '9': {background: '#5484ED'},
+      '10': {background: '#51B749'},
+      '11': {background: '#DC2127'},
+    }
+
     Promise.all(promises).then(function(result){
       var allEvents = flatten(result);
       sortEvents(allEvents);
       var upcomingEvents = allEvents.slice(0, 6);
+
+      allEvents.forEach(event => {
+        if (event.colorId)
+          event.color = colorPalette[event.colorId];
+        else
+          event.color = colorPalette['1'];
+      });
+
       res.send(JSON.stringify(upcomingEvents));
     });
   }
