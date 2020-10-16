@@ -11,11 +11,15 @@ import formula1 from './formula1';
 import headlines from './headlines';
 import xkcd from './xkcd';
 import eyecandy from './eyecandy';
-import calendar from './calendar';
+import calendar from './calendar.vue';
+import photos from './photos';
 import slider from './slider';
+import solaredge from './solaredge';
+import motion from './motion.vue';
+import foksuk from './foksuk';
+import atagone from './atagone.vue';
 
 var app = new vue({
-
     el: '#SpecularApp',
     components: {
         'weather-today': weatherToday,
@@ -27,7 +31,12 @@ var app = new vue({
         'xkcd': xkcd,
         'calendar': calendar,
         'eyecandy': eyecandy,
-        'slider': slider
+        'slider': slider,
+        'photos': photos,
+        'solaredge': solaredge,
+        'motion': motion,
+        'foksuk': foksuk,
+        'atagone': atagone
     }
 
 });

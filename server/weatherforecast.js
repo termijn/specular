@@ -1,4 +1,5 @@
 const request = require('request');
+const fs = require('fs');
 
 var weatherTodayResult = null;
 var latestWeatherUpdate = Date();
@@ -13,29 +14,37 @@ exports.get = function(req, res) {
         return;
     }
 
-    request('http://api.openweathermap.org/data/2.5/forecast?q=Olland,NL&units=metric&lang=nl&APPID=af4e90c5fa4b97bc975f49656739adaf', 
-        function(error, response, body){
-            
-            if (error) return;
-            var jsonBody;
-            try{
-                jsonBody = JSON.parse(body);
-            } catch (ex) {
-                res.send("");
+    fs.readFile('server/openweathermap.json', function (err, content) {
+        if (err) {
+            console.log('Error loading solaredge config file: ' + err);
+            return;
+        }
+        var config = JSON.parse(content);        
+        var url = 'http://api.openweathermap.org/data/2.5/forecast?q=' + config.location + '&units=metric&lang=nl&APPID=' + config.appId; 
+
+        request(url, 
+            function(error, response, body){
+                
+                if (error) return;
+                var jsonBody;
+                try{
+                    jsonBody = JSON.parse(body);
+                } catch (ex) {
+                    res.send("");
+                }
+
+                const daily = parse(jsonBody);
+                res.send(JSON.stringify(daily));
+
+                weatherTodayResult = daily;
+                latestWeatherUpdate = new Date();
             }
+        );
+    });
 
-            //console.log("getWeatherForecast " + body);
-
-            const daily = parse(jsonBody);
-            res.send(JSON.stringify(daily));
-
-            weatherTodayResult = daily;
-            latestWeatherUpdate = new Date();
-        });
 }
 
 function parse(data) {
-    // days = { date: date, forecasts: [{ dateTime: dateTime, temp: item.main.temp }] };
     var days = [];
     
     data.list.forEach(function(item) {

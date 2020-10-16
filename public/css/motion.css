@@ -1,0 +1,13 @@
+.motion {
+    text-align: left;
+    position : relative;
+    bottom: 0px;
+}
+
+.motion > div 
+{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    font-size: 3em;
+}

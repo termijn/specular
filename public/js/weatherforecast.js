@@ -5,7 +5,7 @@ import axios from '../../node_modules/axios/dist/axios';
 import '../css/weatherforecast.css';
 
 export default {
-
+    name: "WeatherForecast",
     template: 
         '<div class="weatherforecast-container">'+
         '<table>'+

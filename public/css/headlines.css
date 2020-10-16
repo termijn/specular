@@ -2,9 +2,7 @@
 {
     position: relative;
     vertical-align: bottom;
-    font-size: 1.5em;
-    grid-column: span 3;
-
+    font-size: 1.4em;
 }
 
 .headlines div
@@ -13,4 +11,9 @@
     bottom: 0;
     left: 0;
     right: 0;
+}
+
+.newssource
+{
+    font-size: 0.8em;
 }

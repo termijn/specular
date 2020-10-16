@@ -15,18 +15,16 @@ exports.get = function(req, res) {
 
     // Load client secrets from a local file.
     fs.readFile('server/client_secret.json', function processClientSecrets(err, content) {
-    if (err) {
-        console.log('Error loading client secret file: ' + err);
-        return;
-    }
-    // Authorize a client with the loaded credentials, then call the
-    // Google Calendar API.
-    authorize(JSON.parse(content), function(auth) { listEvents(auth, res); });
+      if (err) {
+          console.log('Error loading client secret file: ' + err);
+          return;
+      }
+      // Authorize a client with the loaded credentials, then call the
+      // Google Calendar API.
+      authorize(JSON.parse(content), function(auth) { listEvents(auth, res); });
     });
 
 }
-
-
 
 /**
  * Create an OAuth2 client with the given credentials, and then execute the

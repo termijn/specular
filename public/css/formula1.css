@@ -1,7 +1,12 @@
 .formula1
 {
     text-align: center;
-
+    position : relative;
+    left: 50%;
+    -webkit-transform: translate(-50%, 0%);
+    -moz-transform: translate(-50%, 0%);
+    -ms-transform: translate(-50%, 0%);
+    transform: translate(-50%, 0%);    
 }
 
 .formula1 table

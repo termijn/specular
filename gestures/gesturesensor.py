@@ -1,98 +1,91 @@
-#!/usr/bin/env python
- 
+# Pre-requisites: 
+# - sudo pip install apds9960
+# - sudo apt install python-smbus
+# - enable i2c in Raspberry PI configuration 
+
 import sys
 import time
-import RPi.GPIO as GPIO
 import subprocess
 import uinput
- 
-GPIO.setmode(GPIO.BCM)  # GPIO port numbering
-SHUTOFF_DELAY = 20  # seconds
 
-# Pins of the Infrared sensors
-# See https://pinout.xyz/ for the pinout of the Raspberry Pi
-PINS = [17, 27, 22, 23] #  Pins 11, 13, 15, 16 on the board
-PIN_STATUS = [False, False, False, False]
+from apds9960.const import *
+from apds9960 import APDS9960
+import RPi.GPIO as GPIO
+import smbus
 
-keyboard = uinput.Device([uinput.KEY_LEFT, uinput.KEY_RIGHT])
+SHUTOFF_DELAY = 60 * 5  # seconds
+port = 1
+bus = smbus.SMBus(port)
+apds = APDS9960(bus)
 
-is_on = False
-last_motion_time = time.time()
+subprocess.call("modprobe uinput", shell=True)
+keyboard = uinput.Device([uinput.KEY_F5, uinput.KEY_1, uinput.KEY_UP, uinput.KEY_LEFT, uinput.KEY_RIGHT, uinput.KEY_DOWN])
 
-class GestureLeft:
-    
-    def __init__(self):
-        self.state = 0
+def setup():    
+    GPIO.setmode(GPIO.BOARD)
+    GPIO.setup(7, GPIO.IN)
+    GPIO.setup(8, GPIO.OUT)
+    GPIO.setup(10, GPIO.OUT)
+    GPIO.setup(12, GPIO.OUT)
+    GPIO.setup(16, GPIO.OUT)
 
-    def update(self, PIN_STATUS):
-        if self.state == 0:
-            detectPin(self, PIN_STATUS, 0)
+    GPIO.add_event_detect(7, GPIO.FALLING)
 
-    def detectPin(self, PIN_STATUS, pin):
-        detected = False
-        for p in range(PIN_STATUS):
-            if p == pin:
-                detected = detected and PIN_STATUS[p]
-            else:
-                detected = detected and not PIN_STATUS[p]
+    apds.setProximityIntLowThreshold(50)
+    apds.enableGestureSensor()
 
 def main():
-    global is_on
-    print("Gesture sensor running, SHUTOFF DELAY = {}".format(SHUTOFF_DELAY))
-
-    setupPins()
+    print("Gesture sensing started");
+    is_on = True
     last_motion_time = time.time()
- 
+    dirs = {
+        APDS9960_DIR_NONE: "none",
+        APDS9960_DIR_LEFT: "left",
+        APDS9960_DIR_RIGHT: "right",
+        APDS9960_DIR_UP: "up",
+        APDS9960_DIR_DOWN: "down",
+        APDS9960_DIR_NEAR: "near",
+        APDS9960_DIR_FAR: "far"
+    }
     while True:
-        read_pin_status()
-        detect_motion()
-        if is_on:
-            detect_gesture()
-        time.sleep(.1)
-
-def setupPins():
-    global PINS
-    for i in range(4):
-        GPIO.setup(PINS[i], GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
-
-def read_pin_status():
-    global PIN_STATUS
-    global PINS
-    for i in range(4):
-        PIN_STATUS[i] = GPIO.input(PINS[i])
-
-    print("{}:{} {}:{} {}:{} {}:{}".format(PINS[0], PIN_STATUS[0], PINS[1], PIN_STATUS[1], PINS[2], PIN_STATUS[2], PINS[3], PIN_STATUS[3]))
-
-def detect_gesture():
-    global gesture
-
-def detect_motion():
-    global PIN
-    global PIN_STATUS
-    global is_on
-
-    motionDetected = PIN_STATUS[0] == GPIO.HIGH or PIN_STATUS[1] == GPIO.HIGH or PIN_STATUS[2] == GPIO.HIGH or PIN_STATUS[3] == GPIO.HIGH
-    if motionDetected:
-        last_motion_time = time.time()        
-        if not is_on:
-            print("{} {} {} {}".format(PIN_STATUS[0], PIN_STATUS[1], PIN_STATUS[2], PIN_STATUS[3]))
-            print("Motion detected, powering monitor")
-            is_on = True
-            turn_on()
-    else:
         if is_on and time.time() > (last_motion_time + SHUTOFF_DELAY):
             print("No motion detected for SHUTOFF_DELAY, powering off monitor")
             is_on = False
             turn_off()
 
+        if apds.isGestureAvailable():            
+            motion = apds.readGesture()
+            print("Gesture={}".format(dirs.get(motion, "unknown")))
+            last_motion_time = time.time()
+
+            if not is_on:
+                print("Motion detected, powering on monitor")
+                is_on = True
+                turn_on()
+            else:
+                if (motion == APDS9960_DIR_UP):
+                    keyboard.emit_click(uinput.KEY_DOWN)
+                elif (motion == APDS9960_DIR_DOWN):
+                    keyboard.emit_click(uinput.KEY_UP)
+                elif (motion == APDS9960_DIR_LEFT):
+                    keyboard.emit_click(uinput.KEY_RIGHT)
+                elif (motion == APDS9960_DIR_RIGHT):
+                    keyboard.emit_click(uinput.KEY_LEFT)
+                elif (motion == APDS9960_DIR_NONE):
+                    keyboard.emit_click(uinput.KEY_1)
+
 def turn_on():
+    keyboard.emit_click(uinput.KEY_F5)
     subprocess.call("sh monitor_on.sh", shell=True)
  
 def turn_off():
     subprocess.call("sh monitor_off.sh", shell=True)
- 
+
+setup();            
+
 if __name__ == '__main__':
     try:
         main()
     except KeyboardInterrupt:
+        print("Stopping gesture sensing")
         GPIO.cleanup()

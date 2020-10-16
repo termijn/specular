@@ -4,7 +4,7 @@ import axios from '../../node_modules/axios/dist/axios';
 import '../css/weathertoday.css';
 
 export default {
-    
+    name: "WeatherForecast",
     template: '<div class="weathertoday"><i class="owi" v-bind:class="icon"></i> <span class="temp">{{ temp }}</span>  <div class="description">{{ description }}</div></div>',
     //template: '<div class="weathertoday"><img v-bind:src="iconpng"> <span class="temp">{{ temp }}</span>  <div class="description">{{ description }}</div></div>',
     data: function() {

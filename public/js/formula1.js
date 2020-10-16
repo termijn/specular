@@ -4,7 +4,7 @@ import axios from '../../node_modules/axios/dist/axios';
 import '../css/formula1.css';
 
 export default {
-    
+    name: "Formula1",
     template: 
         '<div class="formula1">'+
         '<table>'+
@@ -60,15 +60,19 @@ export default {
                 const isLater = date >= now;
                 return isLater;
             });
-            
-            var nextRaceDate = self.parseDate(nextRace.date);
-            var nextRaceDuration = new Date(nextRaceDate - now);
 
-            this.name = nextRace.raceName;
-            this.date = nextRaceDate.getDate() + '-' + nextRaceDate.getMonth() + '-' + nextRaceDate.getFullYear();
-            // duration in days
-            this.duration = Math.ceil(nextRaceDuration / 1000 / 60 / 60 / 24);
-            this.visible = true;
+            if (nextRace !== undefined)
+            {
+                var nextRaceDate = self.parseDate(nextRace.date);
+                var nextRaceDuration = new Date(nextRaceDate - now);
+    
+                self.name = nextRace.raceName;
+                self.date = nextRaceDate.getDate() + '-' + nextRaceDate.getMonth() + '-' + nextRaceDate.getFullYear();
+                // duration in days
+                self.duration = Math.ceil(nextRaceDuration / 1000 / 60 / 60 / 24);
+                self.visible = true;
+            }
+            this.visible = false;
         },
         parseDate(str) {
             var tokens = str.split("-");

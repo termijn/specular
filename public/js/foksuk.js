@@ -2,18 +2,18 @@ import axios from '../../node_modules/axios/dist/axios';
 import '../css/xkcd.css';
 
 export default {
-    name: "Xkcd",
+    name: "FokSuk",
     template: '<div class="xkcd"> <img v-bind:src="imgurl"></div>',
-    duration: 30 * 1000,
+    duration: 15 * 1000,
     data: function() {
         return { imgurl: '', alt: ''};
     },
     mounted: function() {
         const self = this;
-        axios.get('/getXkcd')
-                .then(function(response){
-                   self.imgurl = response.data.img;
-                   self.alt = response.data.alt;
+        axios.get('/getFokSuk')
+                .then(function(response) {                    
+                   self.imgurl = response.data[0].image;
+                   self.alt = response.data[0].title;
                 });
     }
 }

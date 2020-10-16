@@ -1,6 +1,7 @@
 import '../css/greeting.css';
 
 export default {
+    name: "Greeting",
     template: '<div class="message"><transition name="fade"><span v-if="visible">{{message}}</span></transition></div>',
     data: function() {
         var dateTime = new Date();
@@ -17,7 +18,6 @@ export default {
     },
     mounted: function() {
         const self = this;
-        //setTimeout(function(){self.visible = true;}, 100);
         setTimeout(function(){self.visible = false;}, 5000);
     }
 }

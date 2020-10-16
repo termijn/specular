@@ -1,5 +1,6 @@
 /dist/*
 /node_modules/*
 /public/dependencies/*
-/server/client_secret.json
+/server/*.json
 /.vscode/*
+*.save

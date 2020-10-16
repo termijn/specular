@@ -14,11 +14,14 @@ Project for powering a magic mirror
 - Today's xkcd comic
 - Google calendar upcoming events
 - Random animated gifs
-- Simple gesture control using 4 infrared sensors
+- Gesture control using a APDS9960 gesture sensor module
+- Fokke en Sukke cartoon
+- Atag One status 
+- Solar Edge solar panels status
 
 ## Dependencies
-- Express 4.16.2
-- Vue 2.5.14
+- Express
+- Vue
 - Axios
 - Skeleton-css
 - Open weather icons

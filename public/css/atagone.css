@@ -1,0 +1,29 @@
+.atagone {
+    text-align: left;
+    position : relative;
+    bottom: 0px;
+}
+
+.atagone > div 
+{
+    position: absolute;
+    bottom: 0;
+}
+
+div.atagonelogo
+{
+    display: table;
+    margin-left: -10px;
+}
+
+div.atagonelogo img
+{
+    margin: 4px;
+    height: 1.0em;
+}
+
+span.powerdescription
+{
+    font-size: 0.7em;
+    color: #CCC;
+}

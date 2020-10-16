@@ -2,6 +2,7 @@ import common from './common';
 import '../css/eyecandy.css';
 
 export default {
+    name: "EyeCandy",
     template: 
         '<div class="eyecandy">'+
             '<div v-if="visible">'+
@@ -44,13 +45,19 @@ export default {
                 'http://68.media.tumblr.com/116333fb96e8686e857b1db8a26fe241/tumblr_myucf1d5VM1spu58bo1_500.gif',
                 'http://www.gifimagesdownload.com/wp-content/uploads/2016/02/cute-cool-gifs-333.gif',
                 'http://bestanimations.com/Humans/Skulls/skull-animation-gif-2.gif',
-                'http://www.gifimagesdownload.com/wp-content/uploads/2016/02/best-cool-gifs-773.gif',
                 'https://static.tumblr.com/fc536f36bf2da8ddb6374ba63a89a479/wslnmk1/EvLo1xgf0/tumblr_static_tumblr_static_filename_640.gif',
                 'http://static.giga.de/wp-content/uploads/2015/05/face-red-loop-15.emoji_-rcm320x0.gif',
                 'https://media.giphy.com/media/l2QDPFF5sQspEy4Q8/giphy.gif',
                 'https://media.giphy.com/media/l0HlVlr2guJQmQf5e/giphy.gif',
                 'https://media.giphy.com/media/yidUzl5yPUTNyp59F6/giphy.gif',
-                'https://media.giphy.com/media/vriJaV5RdhvBC/giphy.gif'
+                'https://media.giphy.com/media/vriJaV5RdhvBC/giphy.gif',
+                'https://www.thisiscolossal.com/wp-content/uploads/2018/08/Isopoly_04.gif',
+                'https://www.thisiscolossal.com/wp-content/uploads/2018/08/Isopoly_03.gif',
+                'https://www.thisiscolossal.com/wp-content/uploads/2018/08/Isopoly_02.gif',
+                'https://www.thisiscolossal.com/wp-content/uploads/2018/08/Isopoly_01.gif',
+                'https://www.thisiscolossal.com/wp-content/uploads/2017/08/Cracked_Gem.gif',
+                'https://www.thisiscolossal.com/wp-content/uploads/2018/04/agif2opt.gif',
+                'https://www.thisiscolossal.com/wp-content/uploads/2018/12/agifcolossalspiral2opt.gif'
             ]
         
         };

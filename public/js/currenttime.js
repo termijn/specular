@@ -2,6 +2,7 @@ import common from './common';
 import '../css/currenttime.css';
 
 export default {
+    name: "CurrentTime",
     template: '<div class="date">'+
               '  <div>{{dayofweek}}, {{dayofmonth}} {{month}} {{year}}</div>'+
               '  <div class="time">{{time}}</div>'+

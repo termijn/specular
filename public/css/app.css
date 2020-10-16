@@ -1,18 +1,18 @@
-@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400');
+/* @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400'); */
+@import url('https://fonts.googleapis.com/css?family=Bellota+Text:300,400');
+
 /*@import url('https://fonts.googleapis.com/css?family=Raleway');*/
-
-
 
 body
 {    
-    font-family: 'Source Sans Pro' !important;
+    font-family: 'Bellota Text' !important;
     font-weight: 300;
     background-color: black !important;
     /*color: #85abd1 !important;*/
     color: #FFF !important;
     text-align: center !important;
-    margin: 64px;
-    font-size: 24px;
+    margin: 48px;
+    font-size: 21px;
     -webkit-font-smoothing: antialiased;
     -webkit-text-stroke: 1px;
     overflow:hidden;

@@ -4,10 +4,10 @@ import axios from '../../node_modules/axios/dist/axios';
 import '../css/headlines.css';
 
 export default {
-
+    name: "Headlines",
     template: 
         '<div class="headlines"><transition name="fade">'+
-        '<div v-if="visible"><span class="dimmed">{{ currentheadline.source }}</span> <br/> <span> {{ currentheadline.title }} </span>  </div></transition></div>',
+        '<div v-if="visible"><span class="dimmed newssource">{{ currentheadline.source }}</span> <br/> <span> {{ currentheadline.title }} </span>  </div></transition></div>',
     data: function() {
         return { visible: true, currentheadline: '', index: 0, headlines: [] }
     },

@@ -1,6 +1,13 @@
 .photos img
 {
     box-sizing: content-box;    
-    height: 100%;    
+    height: 180%;    
     box-shadow: 0 0 8px 8px black inset;
+}
+
+.photos
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
