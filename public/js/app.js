@@ -5,12 +5,12 @@ import vue from '../../node_modules/vue/dist/vue';
 
 import weatherToday from './weathertoday';
 import weatherForecast from './weatherforecast';
-import currentTime from './currenttime';
+import currentTime from './currenttime.vue';
 import greeting from './greeting';
 import formula1 from './formula1';
 import headlines from './headlines';
 import xkcd from './xkcd';
-import eyecandy from './eyecandy';
+import eyecandy from './eyecandy.vue';
 import calendar from './calendar.vue';
 import photos from './photos';
 import slider from './slider';

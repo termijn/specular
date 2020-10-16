@@ -1,6 +1,6 @@
 import '../css/slider.css';
 
-import eyecandy from './eyecandy';
+import eyecandy from './eyecandy.vue';
 import formula1 from './formula1';
 import xkcd from './xkcd';
 import foksuk from './foksuk';

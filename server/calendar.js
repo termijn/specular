@@ -1,7 +1,8 @@
 var fs = require('fs');
 var readline = require('readline');
-var google = require('googleapis');
-var googleAuth = require('google-auth-library');
+var {google} = require('googleapis');
+//var googleAuth = require('google-auth-library');
+var OAuth2 = google.auth.OAuth2;
 var moment = require('moment');
 
 // If modifying these scopes, delete your previously saved credentials
@@ -37,8 +38,7 @@ function authorize(credentials, callback) {
     var clientSecret = credentials.installed.client_secret;
     var clientId = credentials.installed.client_id;
     var redirectUrl = credentials.installed.redirect_uris[0];
-    var auth = new googleAuth();
-    var oauth2Client = new auth.OAuth2(clientId, clientSecret, redirectUrl);
+    var oauth2Client = new OAuth2(clientId, clientSecret, redirectUrl);
   
     // Check if we have previously stored a token.
     fs.readFile(TOKEN_PATH, function(err, token) {
@@ -120,25 +120,20 @@ function authorize(credentials, callback) {
 
       calendar.events.list({
           auth: auth,
-          calendarId: calendarId
-        }, 
-        { 
-            qs: {
-                timeMin: (new Date()).toISOString(),
-                singleEvents: true,
-                orderBy: 'startTime',
-                maxResults: 6
-            } 
-        },
+          calendarId: calendarId,
+          timeMin: (new Date()).toISOString(),
+          singleEvents: true,
+          orderBy: 'startTime',
+          maxResults: 6
+        },         
         function(err, response) {
-          //console.log('getEvents response  ' + JSON.stringify(response));
-  
+          // console.log('getEvents response  ' + JSON.stringify(response));  
           if (err) {
             console.log('The API returned an error: ' + err);
             resolve([]);
             return;
           }
-          var events = response.items;
+          var events = response.data.items;
           if (events.length == 0) {
             console.log('No upcoming events found.');
             resolve([]);
