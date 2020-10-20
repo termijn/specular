@@ -7,16 +7,16 @@ import weatherToday from './weathertoday';
 import weatherForecast from './weatherforecast';
 import currentTime from './currenttime.vue';
 import greeting from './greeting';
-import formula1 from './formula1';
+import formula1 from './formula1.vue';
 import headlines from './headlines';
 import xkcd from './xkcd';
 import eyecandy from './eyecandy.vue';
 import calendar from './calendar.vue';
 import photos from './photos';
-import slider from './slider';
-import solaredge from './solaredge';
+import slider from './slider.vue';
+import solaredge from './solaredge.vue';
 import motion from './motion.vue';
-import foksuk from './foksuk';
+import foksuk from './foksuk.vue';
 import atagone from './atagone.vue';
 
 var app = new vue({

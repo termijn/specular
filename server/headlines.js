@@ -1,6 +1,8 @@
 const request = require('request');
 const rssparser = require('rss-url-parser');
 const fs = require('fs');
+const log = require('./log');
+const component = 'Headlines';
 
 const feeds = [
     {url: 'http://feeds.nos.nl/nosnieuwsalgemeen', source: 'NOS nieuws'},    
@@ -25,18 +27,14 @@ exports.get = function(req, res) {
         results.forEach(data => { totalNrHeadlines += data.length; });
 
         const nrFeeds = results.length;
-        console.log('%d feeds', nrFeeds);
         let feedIndex = 0;
         let headlineIndex = 0;
 
         while (headlines.length < totalNrHeadlines) {
-            //console.log('feed %d, headline %d', feedIndex, headlineIndex);
-
             const feedResult = results[feedIndex];
             if (headlineIndex < feedResult.length) {
                 const source = feeds[feedIndex].source;
                 const headline = {title: feedResult[headlineIndex].title, source: source}
-                //console.log(JSON.stringify(headline));
                 headlines.push(headline);
             }            
 

@@ -27,7 +27,7 @@
             update: function()
             {
                 const self = this;
-                common.interval(5 * 1000, function()
+                common.interval(30 * 1000, function()
                 {
                     axios.get('/getAtagOne')
                     .then(function(response) {

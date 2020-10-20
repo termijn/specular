@@ -8,6 +8,8 @@
     </div>    
 </template>
 
+<style src="../css/motion.css"></style>
+
 <script>
     export default {
         name: "Motion",
@@ -77,5 +79,3 @@
     }
 
 </script>
-
-<style src="../css/motion.css"></style>

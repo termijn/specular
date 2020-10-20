@@ -1,7 +1,9 @@
 const dgram = require("dgram");
 const http = require('http')
 const macaddress = require("macaddress");
+const log = require('./log');
 
+const component = 'Atag One';
 const MESSAGE_INFO_CONTROL = 1;
 const MESSAGE_INFO_SCHEDULES = 2;
 const MESSAGE_INFO_CONFIGURATION = 4;
@@ -41,6 +43,7 @@ exports.get = function(req, res) {
 
 function connect(onSuccess) 
 {
+    log.info(component, 'Discovering');
     var server = dgram.createSocket("udp4");
     var atagDevice = null;
 
@@ -49,7 +52,7 @@ function connect(onSuccess)
         if (message.startsWith("ONE ")) {
             var tokens = message.split(' ');
             if (tokens.length == 3) {
-                console.log("ATAG One found");
+                log.info(component, 'Atag One discovered');
                 var device = tokens[1];
                 atagDevice = { 
                     id: device, 
@@ -62,25 +65,24 @@ function connect(onSuccess)
     });
 
     server.on("listening", function () {
-    var address = server.address();
-    console.log("server listening " +
-        address.address + ":" + address.port);
-    });
+        var address = server.address();
 
-    server.on("close", function() {
-        if (atagDevice == null)  { 
-            console.log("No Atag One found");
-        }    
-        console.log("   deviceId: " + atagDevice.id + " from " + atagDevice.ipAddress + ":" + atagDevice.port);
-        
-        macaddress.one(function (err, macaddress) {
-            var mac = macaddress.toString();
-            console.log("Mac address for this host: %s", mac);  
-            pair(atagDevice, macaddress.toString());
-            onSuccess(atagDevice, macaddress);
+        log.info(component, "Listening for broadcast " + address.address + ":" + address.port);
+
+        server.on("close", function() {
+            if (atagDevice == null)  { 
+                log.info(component, "No Atag One found yet");
+            }    
+            log.info(component, "   deviceId: " + atagDevice.id + " from " + atagDevice.ipAddress + ":" + atagDevice.port);
+            
+            macaddress.one(function (err, macaddress) {
+                var mac = macaddress.toString();
+                log.info(component, "Mac address for this host: " + mac);
+                pair(atagDevice, macaddress.toString());
+                onSuccess(atagDevice, macaddress);
+            });
         });
     });
-
     server.bind(11000);
 }
 
@@ -120,18 +122,18 @@ function pair(atagDevice, macaddress)
     }
     
     const req = http.request(options, res => {
-        console.log(`statusCode: ${res.statusCode}`)
+        log.info(component, 'statusCode: ' + res.statusCode);
         res.on('data', d => {
-            process.stdout.write(d)
+            log.info(component, d);
         })
-    })
+    });
     
     req.on('error', error => {
-        console.error(error)
-    })
+        log.info(component, error);
+    });
     
-    req.write(data)
-    req.end()
+    req.write(data);
+    req.end();
 }
 
 function getStatus(atagDevice, macaddress, onSuccess)
@@ -172,7 +174,7 @@ function getStatus(atagDevice, macaddress, onSuccess)
     })
     
     req.on('error', error => {
-        console.error(error)
+        log.info(component, 'error: ' + error);
     })
     
     req.write(data)

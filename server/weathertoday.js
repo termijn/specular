@@ -13,7 +13,7 @@ exports.get = function(req, res) {
         return;
     }
 
-    fs.readFile('server/openweathermap.json', function (err, content) {
+    fs.readFile('server/config/openweathermap.json', function (err, content) {
         if (err) {
             console.log('Error loading solaredge config file: ' + err);
             return;

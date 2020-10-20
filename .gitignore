@@ -1,6 +1,6 @@
 /dist/*
 /node_modules/*
 /public/dependencies/*
-/server/*.json
+/server/config/*
 /.vscode/*
 *.save

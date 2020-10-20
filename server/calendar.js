@@ -1,9 +1,11 @@
 var fs = require('fs');
 var readline = require('readline');
 var {google} = require('googleapis');
-//var googleAuth = require('google-auth-library');
 var OAuth2 = google.auth.OAuth2;
 var moment = require('moment');
+var log = require('./log');
+
+const component = 'Calendar';
 
 // If modifying these scopes, delete your previously saved credentials
 // at ~/.credentials/calendar-nodejs-quickstart.json
@@ -13,27 +15,15 @@ var TOKEN_DIR = (process.env.HOME || process.env.HOMEPATH ||
 var TOKEN_PATH = TOKEN_DIR + 'calendar-nodejs.json';
 
 exports.get = function(req, res) {
-
-    // Load client secrets from a local file.
-    fs.readFile('server/client_secret.json', function processClientSecrets(err, content) {
+    fs.readFile('server/config/client_secret.json', function processClientSecrets(err, content) {
       if (err) {
-          console.log('Error loading client secret file: ' + err);
+          log.info(component, 'Error loading client secret file: ' + err);
           return;
       }
-      // Authorize a client with the loaded credentials, then call the
-      // Google Calendar API.
       authorize(JSON.parse(content), function(auth) { listEvents(auth, res); });
     });
-
 }
 
-/**
- * Create an OAuth2 client with the given credentials, and then execute the
- * given callback function.
- *
- * @param {Object} credentials The authorization client credentials.
- * @param {function} callback The callback to call with the authorized client.
- */
 function authorize(credentials, callback) {
     var clientSecret = credentials.installed.client_secret;
     var clientId = credentials.installed.client_id;
@@ -64,7 +54,7 @@ function authorize(credentials, callback) {
       access_type: 'offline',
       scope: SCOPES
     });
-    console.log('Authorize this app by visiting this url: ', authUrl);
+    log.info(component, 'Authorize this app by visiting this url: ', authUrl);
     var rl = readline.createInterface({
       input: process.stdin,
       output: process.stdout
@@ -73,7 +63,7 @@ function authorize(credentials, callback) {
       rl.close();
       oauth2Client.getToken(code, function(err, token) {
         if (err) {
-          console.log('Error while trying to retrieve access token', err);
+          log.info(component, 'Error while trying to retrieve access token ' + err);
           return;
         }
         oauth2Client.credentials = token;
@@ -97,7 +87,7 @@ function authorize(credentials, callback) {
       }
     }
     fs.writeFile(TOKEN_PATH, JSON.stringify(token));
-    console.log('Token stored to ' + TOKEN_PATH);
+    log.info(component, 'Token stored to ' + TOKEN_PATH);
   }
 
   function getColors(auth) {
@@ -127,15 +117,17 @@ function authorize(credentials, callback) {
           maxResults: 6
         },         
         function(err, response) {
-          // console.log('getEvents response  ' + JSON.stringify(response));  
+
           if (err) {
-            console.log('The API returned an error: ' + err);
+            log.info(component, 'The API returned an error: ' + err);
             resolve([]);
             return;
           }
+
+          // log.info(component, 'getEvents response  ' + JSON.stringify(response.data, null, 4));  
           var events = response.data.items;
           if (events.length == 0) {
-            console.log('No upcoming events found.');
+            log.info(component, 'No upcoming events found.');
             resolve([]);
           } else {        
             resolve(events);
@@ -169,7 +161,7 @@ function authorize(credentials, callback) {
   function listEvents(auth, res) {
     let promises = [
       getEvents(auth, 'primary'),
-      getEvents(auth, encodeURIComponent('nl.dutch#holiday@group.v.calendar.google.com'))
+      getEvents(auth, 'nl.dutch#holiday@group.v.calendar.google.com')
     ];
 
     let colorPalette = 

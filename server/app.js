@@ -1,6 +1,6 @@
 const express = require('express');
 const http = require('http');
-const app = express();
+const log = require('./log');
 
 const weathertoday = require('./weathertoday');
 const weatherforecast = require('./weatherforecast');
@@ -12,6 +12,7 @@ const solarEdge = require('./solaredge');
 const foksuk = require('./foksuk');
 const atagOne = require('./atagone');
 
+const app = express();
 app.use(express.static('dist'));
 app.get('/getWeatherToday', weathertoday.get);
 app.get('/getWeatherForecast', weatherforecast.get);
@@ -25,4 +26,4 @@ app.get('/getFokSuk', foksuk.get);
 app.get('/getAtagOne', atagOne.get);
 
 const port = 8095;
-app.listen(port, () => console.log('Specular Smart Mirror server listening on port ' + port));
+app.listen(port, () => log.info('Specular Smart Mirror', 'server listening on port ' + port));

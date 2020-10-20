@@ -24,9 +24,6 @@ exports.get = function(req, res) {
                     title: item.title,
                     image: item.description.replace('<img src=\"', '').replace('" alt="comic of the day" />', '')
                 };
-
-                // <img src=\"http://foksuk.nl/content/formfield_files/formcartoon_13893_0019baebd1898d63c6b953d5642c25ec2b27e803.jpg\" alt=\"comic of the day\" />
-
                 items.push(item);
             });        
         });
