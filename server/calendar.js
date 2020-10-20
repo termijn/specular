@@ -160,6 +160,8 @@ function authorize(credentials, callback) {
    * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
    */
   function listEvents(auth, res) {
+    log.info(component, 'listEvents requested');
+
     let promises = [
       getEvents(auth, 'primary'),
       getEvents(auth, 'nl.dutch#holiday@group.v.calendar.google.com')

@@ -1,7 +1,7 @@
 <template>
     <div class="formula1">
     <table>
-        <tr v-for="standing in standings" v-bind:key="standing">
+        <tr v-for="standing in standings" v-bind:key="standing.position">
             <td >{{ standing.position}}. </td>
             <td >{{ standing.Driver.givenName}} {{standing.Driver.familyName}}</td>
             <td class="dimmed" ><i> {{ standing.Constructors[0].name}} </i></td>

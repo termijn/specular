@@ -2,7 +2,7 @@
     <div class="calendar">
         <transition name="fade">
             <div v-if="visible">
-                <div v-for="event in events" v-bind:key="event">
+                <div v-for="event in events" v-bind:key="event.summary">
                     <div v-bind:style="{opacity: event.opacity}" class="leftaligned eventsummary"> 
                         <div class="eventblock" v-bind:style="{background: event.color}"> </div>  
                         {{ event.summary}} 
