@@ -10,8 +10,7 @@ const component = 'Calendar';
 // If modifying these scopes, delete your previously saved credentials
 // at ~/.credentials/calendar-nodejs-quickstart.json
 var SCOPES = ['https://www.googleapis.com/auth/calendar.readonly'];
-var TOKEN_DIR = (process.env.HOME || process.env.HOMEPATH ||
-    process.env.USERPROFILE) + '/.credentials/';
+var TOKEN_DIR = './server/config/'
 var TOKEN_PATH = TOKEN_DIR + 'calendar-nodejs.json';
 
 exports.get = function(req, res) {
@@ -54,7 +53,7 @@ function authorize(credentials, callback) {
       access_type: 'offline',
       scope: SCOPES
     });
-    log.info(component, 'Authorize this app by visiting this url: ', authUrl);
+    log.info(component, 'Authorize this app by visiting this url: ' + authUrl);
     var rl = readline.createInterface({
       input: process.stdin,
       output: process.stdout
@@ -86,7 +85,9 @@ function authorize(credentials, callback) {
         throw err;
       }
     }
-    fs.writeFile(TOKEN_PATH, JSON.stringify(token));
+    fs.writeFile(TOKEN_PATH, JSON.stringify(token), function(err, result) {
+      if(err) log.info(component, 'Error ' + err);
+    });
     log.info(component, 'Token stored to ' + TOKEN_PATH);
   }
 
