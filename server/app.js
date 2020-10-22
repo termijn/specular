@@ -11,6 +11,7 @@ const calendar = require('./calendar');
 const solarEdge = require('./solaredge');
 const foksuk = require('./foksuk');
 const atagOne = require('./atagone');
+const garfield = require('./garfield');
 
 const app = express();
 app.use(express.static('dist'));
@@ -24,6 +25,7 @@ app.get('/getCalendar', calendar.get);
 app.get('/getSolarEdge', solarEdge.get);
 app.get('/getFokSuk', foksuk.get);
 app.get('/getAtagOne', atagOne.get);
+app.get('/getGarfield', garfield.get);
 
 const port = 8095;
 app.listen(port, () => log.info('Specular Smart Mirror', 'server listening on port ' + port));

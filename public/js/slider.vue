@@ -16,13 +16,14 @@
     import xkcd from './xkcd';
     import foksuk from './foksuk.vue';
     import solaredge from './solaredge.vue';
+    import garfield from './garfield.vue';
 
     export default {
         name: "Slider",
         data: function() {         
             let result = {
                 currentindex: 0,
-                components: [xkcd, foksuk, eyecandy, formula1, solaredge],
+                components: [garfield, xkcd, eyecandy, formula1, solaredge],
                 currentcomponent: null, 
                 visible: true 
             };
