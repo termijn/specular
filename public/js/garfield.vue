@@ -12,19 +12,19 @@
     export default {
         name: "Garfield",
         duration: 15 * 1000,
-        data: function() {
+        data() {
             return { imgurl: '', alt: ''};
         },
-        mounted: function() {
+        mounted() {
             const self = this;
             self.update();
         },
         methods: {
-            update: function() {
+            update() {
                 const self = this;
                 common.interval(60 * 60 * 1000, function() {
                     axios.get('/getGarfield')
-                        .then(function(response) {
+                        .then(response => {
                             self.imgurl = response.data[0].link;
                             self.alt = response.data[0].title;
                         });

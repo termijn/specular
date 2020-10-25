@@ -13,19 +13,19 @@
 
     import eyecandy from './eyecandy.vue';
     import formula1 from './formula1.vue';
-    import xkcd from './xkcd';
+    import xkcd from './xkcd.vue';
     import foksuk from './foksuk.vue';
     import solaredge from './solaredge.vue';
     import garfield from './garfield.vue';
 
     export default {
         name: "Slider",
-        data: function() {         
+        data: function() {
             let result = {
                 currentindex: 0,
                 components: [garfield, xkcd, eyecandy, formula1, solaredge],
-                currentcomponent: null, 
-                visible: true 
+                currentcomponent: null,
+                visible: true
             };
             return result;
         },
@@ -47,16 +47,16 @@
         methods: {
             nextWidget: function() {
                 const self = this;
-                self.visible = true;            
+                self.visible = true;
                 self.showWidget((self.currentindex + 1) % self.components.length);
             },
             previousWidget: function() {
                 const self = this;
-                self.visible = true;                        
+                self.visible = true;
                 var newIndex = self.currentindex - 1;
                 if (newIndex < 0) {
                     newIndex = self.components.length -1;
-                }            
+                }
                 self.showWidget(newIndex);
             },
             showWidget: function(index) {
@@ -64,7 +64,7 @@
                 self.currentindex = index;
                 self.currentcomponent = self.components[self.currentindex];
                 const duration = typeof self.currentcomponent.duration !== 'undefined' ? self.currentcomponent.duration : 10 * 1000;
-                
+
                 self.nextTimeOut = setTimeout(function() {
                     self.nextWidget();
                 }, duration);

@@ -23,7 +23,7 @@
                 lastUpdate: ''
             };
         },
-        mounted : function() {        
+        mounted : function() {
             this.update();
         },
         methods: {

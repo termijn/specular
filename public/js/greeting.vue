@@ -1,8 +1,19 @@
+
+<template>
+    <div class="message">
+        <transition name="fade">
+            <span v-if="visible">{{message}}</span>
+        </transition>
+    </div>
+</template>
+
+
+
+<script>
 import '../css/greeting.css';
 
 export default {
     name: "Greeting",
-    template: '<div class="message"><transition name="fade"><span v-if="visible">{{message}}</span></transition></div>',
     data: function() {
         var dateTime = new Date();
         var hours = dateTime.getHours();
@@ -21,3 +32,5 @@ export default {
         setTimeout(function(){self.visible = false;}, 5000);
     }
 }
+</script>
+
