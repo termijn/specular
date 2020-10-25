@@ -48,7 +48,7 @@
         }
     }
 
-        vue.directive('hide', {
+    vue.directive('hide', {
         bind: function (el,binding) {
             el.style.visibility = (binding.value) ? "hidden" : "";
         },

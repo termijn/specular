@@ -18,25 +18,25 @@ exports.get = function(req, res) {
             console.log('Error loading solaredge config file: ' + err);
             return;
         }
-        var config = JSON.parse(content);        
+        var config = JSON.parse(content);
         var url = 'http://api.openweathermap.org/data/2.5/weather?q=' + config.location + '&units=metric&lang=nl&APPID=' + config.appId;
-        request(url, 
-            function(error, response, body){        
+        request(url,
+            function(error, response, body){
                 if (error) return;
-        
+
                 var jsonBody;
                 try{
                     jsonBody = JSON.parse(body);
                 } catch (ex) {
                     res.send("");
                 }
-                
+
                 var temperature = Math.round(jsonBody.main.temp);
                 var location = jsonBody.name;
                 var iconFileName = jsonBody.weather[0].icon;
                 var description = jsonBody.weather[0].description;
-                weatherTodayResult = { 
-                    temperature: temperature, 
+                weatherTodayResult = {
+                    temperature: temperature,
                     description: description,
                     location: location,
                     icon: iconFileName
@@ -47,5 +47,5 @@ exports.get = function(req, res) {
             }
         );
 
-    });    
+    });
 }

@@ -5,7 +5,7 @@ const log = require('./log');
 const component = 'Headlines';
 
 const feeds = [
-    {url: 'http://feeds.nos.nl/nosnieuwsalgemeen', source: 'NOS nieuws'},    
+    {url: 'http://feeds.nos.nl/nosnieuwsalgemeen', source: 'NOS nieuws'},
     {url: 'https://www.google.nl/alerts/feeds/03144870627674081704/7233624637832471839', source: 'Google News - Gezondheid'},
     {url: 'https://news.google.com/news/rss/?ned=nl_nl&gl=NL&hl=nl', source: 'Google News - Algemeen'},
     {url: 'https://news.google.com/news/rss/search/section/q/formule%201/formule%201?hl=nl&gl=NL&ned=nl_nl', source: 'Google News - Formule 1'}
@@ -36,7 +36,7 @@ exports.get = function(req, res) {
                 const source = feeds[feedIndex].source;
                 const headline = {title: feedResult[headlineIndex].title, source: source}
                 headlines.push(headline);
-            }            
+            }
 
             feedIndex++;
             if (feedIndex == nrFeeds)

@@ -1,6 +1,6 @@
 <template>
     <div class="xkcd">
-        <img v-bind:src="imgurl">    
+        <img v-bind:src="imgurl">
     </div>
 </template>
 

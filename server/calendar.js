@@ -28,7 +28,7 @@ function authorize(credentials, callback) {
     var clientId = credentials.installed.client_id;
     var redirectUrl = credentials.installed.redirect_uris[0];
     var oauth2Client = new OAuth2(clientId, clientSecret, redirectUrl);
-  
+
     // Check if we have previously stored a token.
     fs.readFile(TOKEN_PATH, function(err, token) {
       if (err) {
@@ -39,7 +39,7 @@ function authorize(credentials, callback) {
       }
     });
   }
-  
+
   /**
    * Get and store new token after prompting for user authorization, and then
    * execute the given callback with the authorized OAuth2 client.
@@ -71,7 +71,7 @@ function authorize(credentials, callback) {
       });
     });
   }
-  
+
   /**
    * Store token to disk be used in later program executions.
    *
@@ -116,7 +116,7 @@ function authorize(credentials, callback) {
           singleEvents: true,
           orderBy: 'startTime',
           maxResults: 6
-        },         
+        },
         function(err, response) {
 
           if (err) {
@@ -125,17 +125,17 @@ function authorize(credentials, callback) {
             return;
           }
 
-          // log.info(component, 'getEvents response  ' + JSON.stringify(response.data, null, 4));  
+          // log.info(component, 'getEvents response  ' + JSON.stringify(response.data, null, 4));
           var events = response.data.items;
           if (events.length == 0) {
             log.info(component, 'No upcoming events found.');
             resolve([]);
-          } else {        
+          } else {
             resolve(events);
           }
         }
       );
-    }); 
+    });
   }
 
   function getDate(item)
@@ -149,9 +149,9 @@ function authorize(credentials, callback) {
 
   function sortEvents(items)
   {
-    items.sort(function(a, b) { 
+    items.sort(function(a, b) {
       return getDate(a) - getDate(b);
-    });    
+    });
   }
 
   /**
@@ -167,7 +167,7 @@ function authorize(credentials, callback) {
       getEvents(auth, 'nl.dutch#holiday@group.v.calendar.google.com')
     ];
 
-    let colorPalette = 
+    let colorPalette =
     {
       '1': {background: '#A4BDFC'},
       '2': {background: '#7AE7BF'},

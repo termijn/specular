@@ -51,7 +51,7 @@
                 });
             },
             parseDriverStandings: function(response) {
-                this.standings = response.MRData.StandingsTable.StandingsLists[0].DriverStandings;            
+                this.standings = response.MRData.StandingsTable.StandingsLists[0].DriverStandings;
                 this.standings = this.standings.slice(0, 6);
             },
             parseSchedule: function(response) {
@@ -68,7 +68,7 @@
                 {
                     var nextRaceDate = self.parseDate(nextRace.date);
                     var nextRaceDuration = new Date(nextRaceDate - now);
-        
+
                     self.name = nextRace.raceName;
                     self.date = nextRaceDate.getDate() + '-' + nextRaceDate.getMonth() + '-' + nextRaceDate.getFullYear();
                     // duration in days

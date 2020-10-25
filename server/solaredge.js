@@ -16,7 +16,7 @@ exports.get = function(req, res) {
         }
         var config = JSON.parse(content);
         const url = 'https://monitoringapi.solaredge.com/sites/' + config.siteId + '/overview?api_key=' + config.apiKey;
-    
+
         var now = new Date();
         var elapsedSeconds = (now.getTime() - lastrequesttime.getTime()) / 1000;
         if (initialized && (elapsedSeconds < 5 * 60))
@@ -33,6 +33,6 @@ exports.get = function(req, res) {
                 lastresponse = body;
                 res.send(body);
             });
-        }    
+        }
     });
 }

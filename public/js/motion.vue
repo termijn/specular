@@ -5,7 +5,7 @@
                 <span v-html="message"></span>
             </div>
         </transition>
-    </div>    
+    </div>
 </template>
 
 <style src="../css/motion.css"></style>
@@ -13,7 +13,7 @@
 <script>
     export default {
         name: "Motion",
-        data: function() {        
+        data: function() {
             var result = { message: "", visible: true  };
             return result;
         },
@@ -75,7 +75,7 @@
                 self.message = "O";
                 self.resetTimeout();
             }
-        }    
+        }
     }
 
 </script>

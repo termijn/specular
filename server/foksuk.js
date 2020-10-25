@@ -17,18 +17,18 @@ exports.get = function(req, res) {
 
     Promise.all(promises).then(results => {
         let items = [];
-        
-        results.forEach(data => { 
+
+        results.forEach(data => {
             data.forEach(item => {
                 var item = {
                     title: item.title,
                     image: item.description.replace('<img src=\"', '').replace('" alt="comic of the day" />', '')
                 };
                 items.push(item);
-            });        
+            });
         });
-    
-        var responseBody = JSON.stringify(items);  
+
+        var responseBody = JSON.stringify(items);
         res.send(responseBody);
     });
 }

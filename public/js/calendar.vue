@@ -3,9 +3,9 @@
         <transition name="fade">
             <div v-if="visible">
                 <div v-for="event in events" v-bind:key="event.summary">
-                    <div v-bind:style="{opacity: event.opacity}" class="leftaligned eventsummary"> 
-                        <div class="eventblock" v-bind:style="{background: event.color}"> </div>  
-                        {{ event.summary}} 
+                    <div v-bind:style="{opacity: event.opacity}" class="leftaligned eventsummary">
+                        <div class="eventblock" v-bind:style="{background: event.color}"> </div>
+                        {{ event.summary}}
                     </div>
                     <div v-bind:style="{opacity: event.opacity * 0.6}" class="leftaligned eventdate">{{ event.date }}</div>
                 </div>
@@ -53,7 +53,7 @@
 
                             var now = moment();
 
-                            var dateIndication = 
+                            var dateIndication =
                                 common.weekdayToStr[date.day()] + ', '   +
                                 date.date() + ' ' +
                                 common.monthToStr[date.month()]
@@ -68,17 +68,17 @@
                             }
 
                             if (hasStartTime) {
-                                dateIndication = 
-                                    dateIndication + 
-                                    ' om ' + 
-                                    date.hour() + 
-                                    ':' + 
+                                dateIndication =
+                                    dateIndication +
+                                    ' om ' +
+                                    date.hour() +
+                                    ':' +
                                     date.minute().toLocaleString(undefined, {minimumIntegerDigits: 2});
                             }
 
                             //console.log(element.color);
 
-                            const event = { 
+                            const event = {
                                 date: dateIndication,
                                 summary: element.summary,
                                 color: element.color.background,
@@ -90,7 +90,7 @@
                         self.visible = true;
                     });
                 });
-            }        
+            }
         }
     };
 

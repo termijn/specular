@@ -7,7 +7,7 @@ exports.getSchedule = function(req, res) {
         json: true
     }
 
-    request(options, 
+    request(options,
     function(error, response, body){
         if (error) return;
         res.send(body);
@@ -20,7 +20,7 @@ exports.getDriverStandings = function(req, res) {
         json: true
     }
 
-    request(options, 
+    request(options,
     function(error, response, body){
         if (error) return;
         res.send(body);

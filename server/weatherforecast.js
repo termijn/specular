@@ -19,12 +19,12 @@ exports.get = function(req, res) {
             console.log('Error loading solaredge config file: ' + err);
             return;
         }
-        var config = JSON.parse(content);        
-        var url = 'http://api.openweathermap.org/data/2.5/forecast?q=' + config.location + '&units=metric&lang=nl&APPID=' + config.appId; 
+        var config = JSON.parse(content);
+        var url = 'http://api.openweathermap.org/data/2.5/forecast?q=' + config.location + '&units=metric&lang=nl&APPID=' + config.appId;
 
-        request(url, 
+        request(url,
             function(error, response, body){
-                
+
                 if (error) return;
                 var jsonBody;
                 try{
@@ -46,7 +46,7 @@ exports.get = function(req, res) {
 
 function parse(data) {
     var days = [];
-    
+
     data.list.forEach(function(item) {
 
         var dateTime = new Date(item.dt * 1000);
@@ -56,10 +56,10 @@ function parse(data) {
 
         var forecast = { dateTime: time, temp: item.main.temp, icon: item.weather[0].icon };
         var day = getDay(date, days);
-        
+
         if (day == undefined) {
             days.push({ date: date, forecasts: [forecast] });
-        } 
+        }
         else {
             day.forecasts.push(forecast);
         }
