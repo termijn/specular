@@ -1,7 +1,7 @@
-# Pre-requisites: 
+# Pre-requisites:
 # - sudo pip install apds9960
 # - sudo apt install python-smbus
-# - enable i2c in Raspberry PI configuration 
+# - enable i2c in Raspberry PI configuration
 
 import sys
 import time
@@ -19,9 +19,9 @@ bus = smbus.SMBus(port)
 apds = APDS9960(bus)
 
 subprocess.call("modprobe uinput", shell=True)
-keyboard = uinput.Device([uinput.KEY_F5, uinput.KEY_1, uinput.KEY_UP, uinput.KEY_LEFT, uinput.KEY_RIGHT, uinput.KEY_DOWN])
+keyboard = uinput.Device([uinput.KEY_F5, uinput.KEY_1, uinput.KEY_2, uinput.KEY_UP, uinput.KEY_LEFT, uinput.KEY_RIGHT, uinput.KEY_DOWN])
 
-def setup():    
+def setup():
     GPIO.setmode(GPIO.BOARD)
     GPIO.setup(7, GPIO.IN)
     GPIO.setup(8, GPIO.OUT)
@@ -53,7 +53,7 @@ def main():
             is_on = False
             turn_off()
 
-        if apds.isGestureAvailable():            
+        if apds.isGestureAvailable():
             motion = apds.readGesture()
             print("Gesture={}".format(dirs.get(motion, "unknown")))
             last_motion_time = time.time()
@@ -62,6 +62,7 @@ def main():
                 print("Motion detected, powering on monitor")
                 is_on = True
                 turn_on()
+                keyboard.emit_click(uinput.KEY_2)
             else:
                 if (motion == APDS9960_DIR_UP):
                     keyboard.emit_click(uinput.KEY_DOWN)
@@ -77,11 +78,11 @@ def main():
 def turn_on():
     keyboard.emit_click(uinput.KEY_F5)
     subprocess.call("sh monitor_on.sh", shell=True)
- 
+
 def turn_off():
     subprocess.call("sh monitor_off.sh", shell=True)
 
-setup();            
+setup();
 
 if __name__ == '__main__':
     try:
