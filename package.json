@@ -26,7 +26,7 @@
   "homepage": "https://github.com/termijn/specular#readme",
   "dependencies": {
     "dav": "^1.7.8",
-    "express": "^4.16.2",
+    "express": "^4.17.3",
     "google-auth-library": "^0.12.0",
     "googleapis": "^39.1.0",
     "macaddress": "^0.2.9",
